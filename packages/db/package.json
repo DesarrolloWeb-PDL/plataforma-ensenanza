@@ -1,0 +1,13 @@
+{
+  "name": "@plataforma/db",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo \"db build not yet configured\"",
+    "lint": "eslint src",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}
