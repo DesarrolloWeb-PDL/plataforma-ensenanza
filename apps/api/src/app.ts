@@ -6,6 +6,7 @@ import { createDb, type Db } from "@plataforma/db";
 import { createStorageProvider, type StorageProvider } from "@plataforma/storage";
 import { registerAuthRoutes } from "./auth/routes";
 import { registerTracksRoutes } from "./tracks/routes";
+import { registerProgressRoutes } from "./progress/routes";
 
 export interface AppContext {
   env: Env;
@@ -40,6 +41,7 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
   const context: AppContext = { env, db, storage };
   await registerAuthRoutes(app, context);
   await registerTracksRoutes(app, context);
+  await registerProgressRoutes(app, context);
 
   return { app, context };
 }
