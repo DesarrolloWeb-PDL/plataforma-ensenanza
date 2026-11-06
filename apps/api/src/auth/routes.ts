@@ -64,11 +64,11 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
   app.post(`${prefix}/auth/register`, async (request, reply) => {
     const parsed = registerSchema.safeParse(request.body);
     if (!parsed.success) {
-      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Invalid registration payload", parsed.error.flatten());
+      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Datos de registro inválidos", parsed.error.flatten());
       return;
     }
     if (!ctx.db) {
-      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "Database is not configured");
+      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
 
@@ -77,7 +77,7 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
 
     const existing = await ctx.db.select().from(users).where(eq(users.email, email)).limit(1);
     if (existing.length > 0) {
-      sendError(reply, 409, ERROR_CODES.CONFLICT, "Email is already registered");
+      sendError(reply, 409, ERROR_CODES.CONFLICT, "El correo ya está registrado");
       return;
     }
 
@@ -96,7 +96,7 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
       .returning();
 
     if (!created) {
-      sendError(reply, 500, ERROR_CODES.INTERNAL_ERROR, "Failed to create user");
+      sendError(reply, 500, ERROR_CODES.INTERNAL_ERROR, "No se pudo crear el usuario");
       return;
     }
 
@@ -107,11 +107,11 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
   app.post(`${prefix}/auth/login`, async (request, reply) => {
     const parsed = loginSchema.safeParse(request.body);
     if (!parsed.success) {
-      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Invalid login payload", parsed.error.flatten());
+      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Datos de inicio de sesión inválidos", parsed.error.flatten());
       return;
     }
     if (!ctx.db) {
-      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "Database is not configured");
+      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
 
@@ -119,11 +119,11 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
     const rows = await ctx.db.select().from(users).where(eq(users.email, email)).limit(1);
     const user = rows[0];
     if (!user?.passwordHash || !(await verifyPassword(password, user.passwordHash))) {
-      sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Invalid email or password");
+      sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Correo o contraseña inválidos");
       return;
     }
     if (user.consentStatus === "suspended" || user.consentStatus === "revoked") {
-      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "User account is suspended");
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "La cuenta de usuario está suspendida");
       return;
     }
 
@@ -133,24 +133,24 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
   app.post(`${prefix}/auth/refresh`, async (request, reply) => {
     const parsed = refreshSchema.safeParse(request.body);
     if (!parsed.success) {
-      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Invalid refresh payload", parsed.error.flatten());
+      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Datos de actualización inválidos", parsed.error.flatten());
       return;
     }
     if (!ctx.db) {
-      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "Database is not configured");
+      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
 
     const payload = verifyJwt(parsed.data.refreshToken, ctx.env.JWT_REFRESH_SECRET);
     if (!payload || payload.type !== "refresh") {
-      sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Invalid or expired refresh token");
+      sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Token de actualización inválido o expirado");
       return;
     }
 
     const rows = await ctx.db.select().from(users).where(eq(users.id, payload.sub)).limit(1);
     const user = rows[0];
     if (!user || user.consentStatus === "suspended" || user.consentStatus === "revoked") {
-      sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "User is not active");
+      sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "El usuario no está activo");
       return;
     }
 
@@ -168,14 +168,14 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
     if (reply.sent) return;
 
     if (!ctx.db) {
-      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "Database is not configured");
+      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
 
     const rows = await ctx.db.select().from(users).where(eq(users.id, request.user!.sub)).limit(1);
     const user = rows[0];
     if (!user) {
-      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "User not found");
+      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Usuario no encontrado");
       return;
     }
     reply.send({ data: { user: toUser(user) } });
@@ -191,29 +191,29 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
     await requireAuth(request, reply, ctx);
     if (reply.sent) return;
     if (!request.user || (request.user.role !== "parent" && request.user.role !== "admin")) {
-      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Only parents or admins can link minors");
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Solo padres o administradores pueden vincular menores");
       return;
     }
     const parsed = linkMinorSchema.safeParse(request.body);
     if (!parsed.success) {
-      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Invalid consent payload", parsed.error.flatten());
+      sendError(reply, 400, ERROR_CODES.VALIDATION_ERROR, "Datos de consentimiento inválidos", parsed.error.flatten());
       return;
     }
     if (!ctx.db) {
-      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "Database is not configured");
+      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
 
     const { parentId, childId, granted } = parsed.data;
     if (request.user.role !== "admin" && request.user.sub !== parentId) {
-      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Cannot link a minor for another parent");
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "No se puede vincular un menor para otro padre");
       return;
     }
 
     const [parent] = await ctx.db.select().from(users).where(eq(users.id, parentId)).limit(1);
     const [child] = await ctx.db.select().from(users).where(eq(users.id, childId)).limit(1);
     if (!parent || !child) {
-      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Parent or child not found");
+      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Padre o hijo no encontrado");
       return;
     }
 
@@ -258,11 +258,11 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
     await requireAuth(request, reply, ctx);
     if (reply.sent) return;
     if (!request.user || (request.user.role !== "parent" && request.user.role !== "admin")) {
-      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Only parents or admins can revoke consent");
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Solo padres o administradores pueden revocar consentimiento");
       return;
     }
     if (!ctx.db) {
-      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "Database is not configured");
+      sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
 
@@ -270,11 +270,11 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
     const links = await ctx.db.select().from(parentLinks).where(eq(parentLinks.childId, childId)).limit(1);
     const link = links[0];
     if (!link) {
-      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Parent link not found");
+      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Vínculo parental no encontrado");
       return;
     }
     if (request.user.role !== "admin" && link.parentId !== request.user.sub) {
-      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Cannot revoke consent for another parent's child");
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "No se puede revocar el consentimiento del hijo de otro padre");
       return;
     }
 

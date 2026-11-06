@@ -35,14 +35,14 @@ export function sendError(
 export async function requireAuth(request: FastifyRequest, reply: FastifyReply, ctx: AuthContext): Promise<void> {
   const authorization = request.headers.authorization;
   if (typeof authorization !== "string" || !authorization.startsWith("Bearer ")) {
-    sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Missing or invalid authorization header");
+    sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Falta o es inválido el encabezado de autorización");
     return;
   }
 
   const token = authorization.slice("Bearer ".length).trim();
   const payload = verifyJwt(token, ctx.env.JWT_ACCESS_SECRET);
   if (!payload || payload.type !== "access") {
-    sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Invalid or expired access token");
+    sendError(reply, 401, ERROR_CODES.UNAUTHORIZED, "Token de acceso inválido o expirado");
     return;
   }
 
@@ -54,7 +54,7 @@ export function requireRole(ctx: AuthContext, ...roles: Array<JwtPayload["role"]
     await requireAuth(request, reply, ctx);
     if (reply.sent) return;
     if (!request.user || !roles.includes(request.user.role)) {
-      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Insufficient role");
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
     }
   };
 }
