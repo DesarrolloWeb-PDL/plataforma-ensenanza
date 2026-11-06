@@ -192,3 +192,10 @@ Final cleanup pass: remove dead code, update README, finalize env example and pr
 ### Next Steps
 - MVP complete.
 
+
+## Status (2026-11-06 end of session)
+- CI GitHub Actions: GREEN (corepack fix, lockfile fixed).
+- Vercel: blocked on stale commit 8729a84; Git integration needs reconnect. Code is ready.
+- All 17 MVP slices complete; repo at origin/main.
+- Next: resolve Vercel deploy (reconnect Git or use Netlify/Cloudflare Pages), then deploy API host.
+
