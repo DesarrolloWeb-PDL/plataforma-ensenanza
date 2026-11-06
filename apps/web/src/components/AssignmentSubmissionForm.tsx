@@ -3,6 +3,8 @@
 import { useState } from "react";
 import posthog from "posthog-js";
 
+import CodeRunner from "@/components/CodeRunner";
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
 interface Props {
@@ -72,7 +74,10 @@ export default function AssignmentSubmissionForm({ assignmentId, type }: Props) 
   return (
     <form onSubmit={submit}>
       {type === "code" ? (
-        <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={10} cols={60} />
+        <div>
+          <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={10} cols={60} />
+          <CodeRunner js={content} title="Vista previa" />
+        </div>
       ) : null}
       {type === "file" ? (
         <div>
