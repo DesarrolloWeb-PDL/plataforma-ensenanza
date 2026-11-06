@@ -220,6 +220,9 @@ importers:
       posthog-node:
         specifier: ^5.62.0
         version: 5.62.0
+      tsx:
+        specifier: ^4.23.15
+        version: 4.23.15
       zod:
         specifier: ^4.6.7
         version: 4.6.7
@@ -230,9 +233,6 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^5.1.0
         version: 5.1.0(vitest@5.1.0)
-      tsx:
-        specifier: ^4.23.15
-        version: 4.23.15
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
