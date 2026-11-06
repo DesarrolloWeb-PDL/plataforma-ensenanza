@@ -1,4 +1,4 @@
-import { badges, levels, lessons, rubrics, tracks, users } from "./schema";
+import { badges, levels, lessons, rubrics, tracks, users, worksheets } from "./schema";
 import { createDb } from "./index";
 
 const url = process.env.DATABASE_URL ?? "postgres://postgres:postgres@localhost:5432/plataforma_ensenanza";
@@ -36,6 +36,16 @@ async function main() {
       }));
     }),
   );
+
+  const allLessons = await db.select().from(lessons);
+  const firstLesson = allLessons[0];
+  await db.insert(worksheets).values({
+    trackId: firstLesson?.trackId ?? null,
+    lessonId: firstLesson?.id ?? null,
+    title: "Hoja de trabajo de ejemplo",
+    fileKey: "content/worksheets/sample.txt",
+    printable: true,
+  });
 
   await db.insert(badges).values([
     { slug: "first-project", name: "Primer proyecto", criteria: { type: "project_approved", count: 1 } },
