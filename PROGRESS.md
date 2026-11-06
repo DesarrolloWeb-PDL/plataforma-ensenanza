@@ -173,3 +173,22 @@ Add comprehensive unit/integration/e2e tests and coverage configuration across t
 ### Next Steps
 - Expand API coverage to additional routes (dashboards, gamification, live classes, worksheets).
 - Add real DB integration tests when Postgres is available in CI.
+
+## Slice 17: Cleanup & Final Docs
+
+### Goal
+Final cleanup pass: remove dead code, update README, finalize env example and progress, run full verification.
+
+### Accomplished
+- Removed scaffold exports (SMOKE, dd) and dead test.
+- Fixed lint unused variable in integration_success test.
+- Aligned .env.example with runtime env schema (PORT, HOST, CORS_ORIGIN, JWT TTLs, R2_FORCE_LOCAL); removed unused vars.
+- Rewrote README with setup, dev/test/deploy instructions and feature summary.
+- Added this final progress entry.
+
+### Verification
+- pnpm typecheck, lint, test, web build, e2e passed.
+
+### Next Steps
+- MVP complete.
+
