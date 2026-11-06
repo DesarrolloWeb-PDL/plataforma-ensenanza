@@ -122,3 +122,19 @@ Implement PWA support (manifest, service worker, offline fallback) and PostHog a
 ### Next Steps
 - Add richer offline caching for worksheets and app shell.
 - Expand PostHog dashboards and user identification.
+
+## Slice 14: Sandbox Code Runner
+
+### Goal
+Provide a sandboxed iframe (+ optional Web Worker) to run user HTML/JS for the teen track, used in assignment submission preview and a dedicated sandbox demo page.
+
+### Accomplished
+- Web: added `CodeRunner` component with srcdoc, CSP meta, `sandbox="allow-scripts"`, 5s timeout kill, reset button, console capture.
+- Web: added optional `runJsInWorker` helper (blob-backed Worker with timeout).
+- Web: added `/sandbox` demo page with HTML/CSS/JS editors and worker run.
+- Web: integrated `CodeRunner` preview into code assignment submission form.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add server-side validation/sanitization if running untrusted code in production.
+- Add richer output capture and error stack display.
