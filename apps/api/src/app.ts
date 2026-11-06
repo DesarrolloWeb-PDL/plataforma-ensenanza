@@ -8,6 +8,7 @@ import { registerAuthRoutes } from "./auth/routes";
 import { registerTracksRoutes } from "./tracks/routes";
 import { registerProgressRoutes } from "./progress/routes";
 import { registerAssignmentsRoutes } from "./assignments/routes";
+import { registerLiveClassesRoutes } from "./live-classes/routes";
 
 export interface AppContext {
   env: Env;
@@ -44,6 +45,7 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
   await registerTracksRoutes(app, context);
   await registerProgressRoutes(app, context);
   await registerAssignmentsRoutes(app, context);
+await registerLiveClassesRoutes(app, context);
 
   return { app, context };
 }
