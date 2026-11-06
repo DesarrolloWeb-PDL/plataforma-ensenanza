@@ -152,3 +152,39 @@ export const lessonSchema = z.object({
   title: z.string().min(1),
   mdxRef: z.string().min(1),
 });
+
+export interface LessonProgress {
+  id: string;
+  studentId: string;
+  lessonId: string;
+  completedAt: string;
+  xpAwarded: number;
+}
+
+export interface LevelCompletion {
+  id: string;
+  studentId: string;
+  levelId: string;
+  status: string;
+  projectSubmissionId: string | null;
+  completedAt: string | null;
+  approvedBy: string | null;
+}
+
+export const lessonProgressSchema = z.object({
+  id: z.string().uuid(),
+  studentId: z.string().uuid(),
+  lessonId: z.string().uuid(),
+  completedAt: z.string().datetime(),
+  xpAwarded: z.number().int().nonnegative(),
+});
+
+export const levelCompletionSchema = z.object({
+  id: z.string().uuid(),
+  studentId: z.string().uuid(),
+  levelId: z.string().uuid(),
+  status: z.string().min(1),
+  projectSubmissionId: z.string().uuid().nullable(),
+  completedAt: z.string().datetime().nullable(),
+  approvedBy: z.string().uuid().nullable(),
+});
