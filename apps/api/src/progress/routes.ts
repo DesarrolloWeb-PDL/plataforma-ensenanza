@@ -1,11 +1,12 @@
 import type { FastifyInstance } from "fastify";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 import { lessons, lessonProgress, levelCompletions, levels, tracks } from "@plataforma/db";
 import { ERROR_CODES } from "@plataforma/shared";
 
 import { AuthContext, requireAuth, sendError } from "../auth/rbac";
 import { idParamSchema, slugParamSchema } from "../tracks/schemas";
+import { awardBadges, awardXp, updateStreak } from "../gamification/service";
 
 function toLessonProgress(row: typeof lessonProgress.$inferSelect) {
   return {
@@ -56,19 +57,36 @@ export async function registerProgressRoutes(app: FastifyInstance, ctx: AuthCont
       return;
     }
 
-    const [row] = await ctx.db
-      .insert(lessonProgress)
-      .values({
-        studentId: request.user.sub,
-        lessonId: parsed.data.id,
-        completedAt: new Date(),
-        xpAwarded: 0,
-      })
-      .onConflictDoUpdate({
-        target: [lessonProgress.studentId, lessonProgress.lessonId],
-        set: { completedAt: new Date() },
-      })
-      .returning();
+    const existingProgress = await ctx.db
+      .select()
+      .from(lessonProgress)
+      .where(and(eq(lessonProgress.studentId, request.user.sub), eq(lessonProgress.lessonId, parsed.data.id)))
+      .limit(1);
+
+    let row;
+    if (existingProgress[0]) {
+      [row] = await ctx.db
+        .update(lessonProgress)
+        .set({ completedAt: new Date() })
+        .where(eq(lessonProgress.id, existingProgress[0].id))
+        .returning();
+      if (!row) row = existingProgress[0];
+    } else {
+      [row] = await ctx.db
+        .insert(lessonProgress)
+        .values({
+          studentId: request.user.sub,
+          lessonId: parsed.data.id,
+          completedAt: new Date(),
+          xpAwarded: 10,
+        })
+        .returning();
+      if (row) {
+        await awardXp(ctx.db, request.user.sub, 10, "lesson_complete", "lesson", parsed.data.id);
+        await updateStreak(ctx.db, request.user.sub);
+        await awardBadges(ctx.db, request.user.sub);
+      }
+    }
 
     if (!row) {
       sendError(reply, 500, ERROR_CODES.INTERNAL_ERROR, "No se pudo registrar el progreso");
@@ -101,19 +119,36 @@ export async function registerProgressRoutes(app: FastifyInstance, ctx: AuthCont
       return;
     }
 
-    const [row] = await ctx.db
-      .insert(levelCompletions)
-      .values({
-        studentId: request.user.sub,
-        levelId: parsed.data.id,
-        status: "completed",
-        completedAt: new Date(),
-      })
-      .onConflictDoUpdate({
-        target: [levelCompletions.studentId, levelCompletions.levelId],
-        set: { status: "completed", completedAt: new Date() },
-      })
-      .returning();
+    const existingCompletion = await ctx.db
+      .select()
+      .from(levelCompletions)
+      .where(and(eq(levelCompletions.studentId, request.user.sub), eq(levelCompletions.levelId, parsed.data.id)))
+      .limit(1);
+
+    let row;
+    if (existingCompletion[0]) {
+      [row] = await ctx.db
+        .update(levelCompletions)
+        .set({ status: "completed", completedAt: new Date() })
+        .where(eq(levelCompletions.id, existingCompletion[0].id))
+        .returning();
+      if (!row) row = existingCompletion[0];
+    } else {
+      [row] = await ctx.db
+        .insert(levelCompletions)
+        .values({
+          studentId: request.user.sub,
+          levelId: parsed.data.id,
+          status: "completed",
+          completedAt: new Date(),
+        })
+        .returning();
+      if (row) {
+        await awardXp(ctx.db, request.user.sub, 50, "level_complete", "level", parsed.data.id);
+        await updateStreak(ctx.db, request.user.sub);
+        await awardBadges(ctx.db, request.user.sub);
+      }
+    }
 
     if (!row) {
       sendError(reply, 500, ERROR_CODES.INTERNAL_ERROR, "No se pudo registrar la finalización del nivel");
