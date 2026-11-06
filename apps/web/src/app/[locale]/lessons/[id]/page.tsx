@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import MdxContent from "@/components/MdxContent";
+import ProgressButton from "@/components/ProgressButton";
 import { loadContent } from "@/lib/content";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
@@ -34,6 +35,7 @@ export default async function LessonPage({ params }: { params: { id: string } })
     <main>
       <h1>{frontmatter.title ?? lesson.title}</h1>
       {frontmatter.description ? <p>{frontmatter.description}</p> : null}
+      <ProgressButton kind="lesson" id={lesson.id} />
       <MdxContent source={content} />
     </main>
   );

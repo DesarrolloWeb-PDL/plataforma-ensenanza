@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import ProgressButton from "@/components/ProgressButton";
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
 interface Level {
@@ -46,11 +48,13 @@ export default async function LevelPage({ params }: { params: { levelId: string 
     <main>
       <h1>{level.title}</h1>
       <p>{level.projectTitle}</p>
+      <ProgressButton kind="level" id={level.id} />
       <h2>{t("title")}</h2>
       <ul>
         {lessons.map((lesson) => (
           <li key={lesson.id}>
             <Link href={`/lessons/${lesson.id}`}>{lesson.title}</Link>
+            <ProgressButton kind="lesson" id={lesson.id} />
           </li>
         ))}
       </ul>
