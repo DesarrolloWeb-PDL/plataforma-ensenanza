@@ -7,6 +7,7 @@ import { createStorageProvider, type StorageProvider } from "@plataforma/storage
 import { registerAuthRoutes } from "./auth/routes";
 import { registerTracksRoutes } from "./tracks/routes";
 import { registerProgressRoutes } from "./progress/routes";
+import { registerAssignmentsRoutes } from "./assignments/routes";
 
 export interface AppContext {
   env: Env;
@@ -42,6 +43,7 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
   await registerAuthRoutes(app, context);
   await registerTracksRoutes(app, context);
   await registerProgressRoutes(app, context);
+  await registerAssignmentsRoutes(app, context);
 
   return { app, context };
 }
