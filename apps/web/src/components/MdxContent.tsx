@@ -5,5 +5,5 @@ interface MdxContentProps {
 }
 
 export default function MdxContent({ source }: MdxContentProps) {
-  return <MDXRemote source={source} />;
+  return <MDXRemote source={source} options={{ mdxOptions: { development: false } }} />;
 }
