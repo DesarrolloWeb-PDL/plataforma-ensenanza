@@ -77,3 +77,18 @@ Implement printable worksheets CRUD, upload/download via storage, teacher answer
 ### Next Steps
 - Add worksheet upload UI for teachers (signed upload).
 - Link worksheets to lessons in lesson pages.
+
+## Slice 11: Dashboards
+
+### Goal
+Implement teacher dashboard (classes, roster, progress view, grading queue, rubrics) and parent dashboard (child progress summary) + web pages + shared types/tests.
+
+### Accomplished
+- Shared: added DashboardSummary, RosterEntry, GradingQueueItem, ParentSummary interfaces and zod schemas; tests.
+- API: added `apps/api/src/dashboards/routes.ts` and registered in app; teacher and parent endpoints.
+- Web: added `/dashboard/teacher` and `/dashboard/parent` pages with basic tables.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add teacher grading actions in dashboard.
+- Add richer charts/summaries.
