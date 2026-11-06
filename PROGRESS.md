@@ -60,3 +60,20 @@ Implement external-link live classes CRUD, attendance, recording link, MeetingPr
 ### Next Steps
 - Embedded provider implementation (future).
 - Teacher attendance management UI.
+
+## Slice 10: Printable Worksheets
+
+### Goal
+Implement printable worksheets CRUD, upload/download via storage, teacher answer keys, web download UI, shared types/tests.
+
+### Accomplished
+- DB: reworked `worksheets` table to use `file_key`, `answer_key_file_key`, `printable`; migration added.
+- Shared: added `Worksheet` interface and zod schemas; tests.
+- API: added `apps/api/src/worksheets/routes.ts` and registered; CRUD, list, download, answer-key endpoints.
+- Web: added worksheets list page and download button component; teacher-only answer key link.
+- Seed: added sample worksheet reference.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add worksheet upload UI for teachers (signed upload).
+- Link worksheets to lessons in lesson pages.
