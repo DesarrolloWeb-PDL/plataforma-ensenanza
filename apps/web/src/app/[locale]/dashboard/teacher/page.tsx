@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
@@ -165,6 +166,7 @@ export default function TeacherDashboardPage() {
               <th>Estudiante</th>
               <th>Enviado</th>
               <th>Estado</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -174,6 +176,9 @@ export default function TeacherDashboardPage() {
                 <td>{q.studentName}</td>
                 <td>{new Date(q.submittedAt).toLocaleString()}</td>
                 <td>{q.status}</td>
+                <td>
+                  <Link href={`/dashboard/teacher/grading/${q.submissionId}`}>Calificar</Link>
+                </td>
               </tr>
             ))}
           </tbody>
