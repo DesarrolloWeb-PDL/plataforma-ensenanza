@@ -24,6 +24,7 @@ export const users = pgTable(
     role: userRole("role").notNull().default("student"),
     locale: text("locale").notNull().default("es"),
     birthDate: date("birth_date"),
+    passwordHash: text("password_hash"),
     consentStatus: text("consent_status").notNull().default("pending"),
     parentUserId: uuid("parent_user_id").references((): AnyPgColumn => users.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
