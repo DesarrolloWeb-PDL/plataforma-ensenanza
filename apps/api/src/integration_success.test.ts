@@ -54,7 +54,7 @@ describe("api integration success paths", () => {
     const studentId = sLogin.json().data.user.id;
 
     // fix enrollment userId
-    await db.update(enrollments).set({ userId: studentId }).where((r: any) => true);
+    await db.update(enrollments).set({ userId: studentId }).where(() => true);
 
     // tracks read endpoints
     let res = await app.inject({ method: "GET", url: "/api/v1/tracks" });
