@@ -7,6 +7,7 @@ import { ERROR_CODES } from "@plataforma/shared";
 import { AuthContext, requireAuth, sendError } from "../auth/rbac";
 import { idParamSchema, slugParamSchema } from "../tracks/schemas";
 import { awardBadges, awardXp, updateStreak } from "../gamification/service";
+import { checkStudentEnrolledInTrack } from "../lib/ownership";
 
 function toLessonProgress(row: typeof lessonProgress.$inferSelect) {
   return {
@@ -52,8 +53,14 @@ export async function registerProgressRoutes(app: FastifyInstance, ctx: AuthCont
     }
 
     const lessonRows = await ctx.db.select().from(lessons).where(eq(lessons.id, parsed.data.id)).limit(1);
-    if (!lessonRows[0]) {
+    const lesson = lessonRows[0];
+    if (!lesson) {
       sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Lección no encontrada");
+      return;
+    }
+    const enrolled = await checkStudentEnrolledInTrack(ctx.db, lesson.trackId, request.user!.sub, request.user?.role);
+    if (!enrolled) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Debes estar inscrito en la clase");
       return;
     }
 
@@ -115,8 +122,14 @@ export async function registerProgressRoutes(app: FastifyInstance, ctx: AuthCont
     }
 
     const levelRows = await ctx.db.select().from(levels).where(eq(levels.id, parsed.data.id)).limit(1);
-    if (!levelRows[0]) {
+    const level = levelRows[0];
+    if (!level) {
       sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Nivel no encontrado");
+      return;
+    }
+    const enrolled = await checkStudentEnrolledInTrack(ctx.db, level.trackId, request.user!.sub, request.user?.role);
+    if (!enrolled) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Debes estar inscrito en la clase");
       return;
     }
 

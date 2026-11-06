@@ -2,12 +2,13 @@ import type { FastifyInstance } from "fastify";
 import { eq, inArray } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
 
-import { assignments, grades, lessons, submissions } from "@plataforma/db";
+import { assignments, classes, grades, lessons, submissions } from "@plataforma/db";
 import { ERROR_CODES, assignmentCreateSchema, assignmentUpdateSchema, gradeSubmissionSchema, signedUploadSchema, submitAssignmentSchema } from "@plataforma/shared";
 import type { StorageProvider } from "@plataforma/storage";
 
 import { AuthContext, requireAuth, sendError } from "../auth/rbac";
 import { idParamSchema } from "../tracks/schemas";
+import { checkStudentEnrolled, checkTeacherOwnsClass, checkTeacherOwnsAssignment } from "../lib/ownership";
 
 type Ctx = AuthContext & { storage: StorageProvider };
 
@@ -113,10 +114,21 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
       return;
     }
     const data = parsed.data;
+    const clsRows = await ctx.db.select().from(classes).where(eq(classes.id, data.classId)).limit(1);
+    const cls = clsRows[0];
+    if (!cls) {
+      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Clase no encontrada");
+      return;
+    }
+    if (!(await checkTeacherOwnsClass(ctx.db, data.classId, request.user!.sub, request.user?.role))) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
+      return;
+    }
     const [row] = await ctx.db
       .insert(assignments)
       .values({
         classId: data.classId,
+        createdBy: request.user!.sub,
         lessonId: data.lessonId ?? null,
         type: data.type ?? "code",
         title: data.title,
@@ -154,6 +166,16 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
     }
     if (!ctx.db) {
       sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
+      return;
+    }
+    const existingRows = await ctx.db.select().from(assignments).where(eq(assignments.id, paramParsed.data.id)).limit(1);
+    const existing = existingRows[0];
+    if (!existing) {
+      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Tarea no encontrada");
+      return;
+    }
+    if (!(await checkTeacherOwnsAssignment(ctx.db, existing.id, request.user!.sub, request.user?.role))) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
       return;
     }
     const data = bodyParsed.data;
@@ -197,6 +219,16 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
       sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
       return;
     }
+    const delRows = await ctx.db.select().from(assignments).where(eq(assignments.id, parsed.data.id)).limit(1);
+    const delAssignment = delRows[0];
+    if (!delAssignment) {
+      sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Tarea no encontrada");
+      return;
+    }
+    if (!(await checkTeacherOwnsAssignment(ctx.db, delAssignment.id, request.user!.sub, request.user?.role))) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
+      return;
+    }
     await ctx.db.delete(assignments).where(eq(assignments.id, parsed.data.id));
     reply.code(204).send();
   });
@@ -226,6 +258,11 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
     const assignment = assignmentRows[0];
     if (!assignment) {
       sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Tarea no encontrada");
+      return;
+    }
+    const enrolled = await checkStudentEnrolled(ctx.db, assignment.classId, request.user!.sub, request.user?.role);
+    if (!enrolled) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Debes estar inscrito en la clase");
       return;
     }
 
@@ -295,6 +332,13 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
       sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
       return;
     }
+    if (request.user?.role !== "student") {
+      const owns = await checkTeacherOwnsAssignment(ctx.db, submission.assignmentId, request.user!.sub, request.user?.role);
+      if (!owns) {
+        sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
+        return;
+      }
+    }
     const gradeRows = await ctx.db.select().from(grades).where(eq(grades.submissionId, submission.id)).limit(1);
     const grade = gradeRows[0];
     reply.send({ data: { ...toSubmission(submission), grade: grade ? toGrade(grade) : null } });
@@ -325,6 +369,11 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
     const submission = subRows[0];
     if (!submission) {
       sendError(reply, 404, ERROR_CODES.NOT_FOUND, "Envío no encontrado");
+      return;
+    }
+    const owns = await checkTeacherOwnsAssignment(ctx.db, submission.assignmentId, request.user!.sub, request.user?.role);
+    if (!owns) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
       return;
     }
     const data = bodyParsed.data;
@@ -370,6 +419,11 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
     }
     if (!ctx.db) {
       sendError(reply, 503, ERROR_CODES.INTERNAL_ERROR, "La base de datos no está configurada");
+      return;
+    }
+    const owns = await checkTeacherOwnsAssignment(ctx.db, paramParsed.data.id, request.user!.sub, request.user?.role);
+    if (!owns) {
+      sendError(reply, 403, ERROR_CODES.FORBIDDEN, "Permisos insuficientes");
       return;
     }
     const subs = await ctx.db.select().from(submissions).where(eq(submissions.assignmentId, paramParsed.data.id));
