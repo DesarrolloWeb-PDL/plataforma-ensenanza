@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import posthog from "posthog-js";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
@@ -60,6 +61,7 @@ export default function AssignmentSubmissionForm({ assignmentId, type }: Props) 
       if (!res.ok) throw new Error("No se pudo enviar la tarea");
       const json = await res.json();
       setStatus(`Enviado (versión ${json.data.version})`);
+      posthog.capture("assignment_submitted", { assignment_id: assignmentId });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
     } finally {

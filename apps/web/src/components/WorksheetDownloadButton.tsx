@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
@@ -48,6 +49,7 @@ export default function WorksheetDownloadButton({ worksheetId, label, suffix, te
       if (!res.ok) throw new Error("No se pudo obtener el enlace de descarga");
       const json = (await res.json()) as { data: { url: string } };
       window.open(json.data.url, "_blank", "noopener,noreferrer");
+      posthog.capture("worksheet_downloaded", { worksheet_id: worksheetId, suffix });
     } catch (err) {
       setStatus(err instanceof Error ? err.message : "Error desconocido");
     } finally {

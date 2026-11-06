@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
@@ -49,6 +50,7 @@ export default function ProgressButton({ kind, id }: ProgressButtonProps) {
       });
       if (!res.ok) throw new Error("No se pudo marcar como completado");
       setCompleted(true);
+      if (kind === "lesson") posthog.capture("lesson_completed", { lesson_id: id });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
     } finally {
