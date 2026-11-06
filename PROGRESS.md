@@ -156,3 +156,20 @@ Implement teacher grading UI with rubric form, ownership/enrollment guards in AP
 ### Next Steps
 - Add rubric picker and validation in grading UI.
 - Add richer ownership tests for routes.
+
+## Slice 16: Testing & Verification
+
+### Goal
+Add comprehensive unit/integration/e2e tests and coverage configuration across the monorepo.
+
+### Accomplished
+- Coverage: added @vitest/coverage-v8 to shared/db/storage/api; configured coverage thresholds in vitest configs.
+- API integration tests: added fake in-memory DB and tests for auth register/login, tracks read, progress complete, assignments submit, ownership 403, plus success paths.
+- Shared: expanded zod schema tests with edge cases.
+- Web e2e: added Playwright tests for sandbox page, tracks page, lesson page; made track/lesson fetches resilient.
+- CI: updated workflow to run coverage per package and Playwright e2e.
+- Verification: typecheck, lint, test, web build, e2e passed.
+
+### Next Steps
+- Expand API coverage to additional routes (dashboards, gamification, live classes, worksheets).
+- Add real DB integration tests when Postgres is available in CI.
