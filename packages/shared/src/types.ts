@@ -374,3 +374,34 @@ export const liveClassCreateSchema = z.object({
 });
 
 export const liveClassUpdateSchema = liveClassCreateSchema.partial();
+
+export interface Worksheet {
+  id: string;
+  trackId: string | null;
+  lessonId: string | null;
+  title: string;
+  fileKey: string;
+  answerKeyFileKey: string | null;
+  printable: boolean;
+}
+
+export const worksheetSchema = z.object({
+  id: z.string().uuid(),
+  trackId: z.string().uuid().nullable(),
+  lessonId: z.string().uuid().nullable(),
+  title: z.string().min(1),
+  fileKey: z.string().min(1),
+  answerKeyFileKey: z.string().min(1).nullable(),
+  printable: z.boolean(),
+});
+
+export const worksheetCreateSchema = z.object({
+  trackId: z.string().uuid().nullable().optional(),
+  lessonId: z.string().uuid().nullable().optional(),
+  title: z.string().min(1),
+  fileKey: z.string().min(1),
+  answerKeyFileKey: z.string().min(1).nullable().optional(),
+  printable: z.boolean().optional(),
+});
+
+export const worksheetUpdateSchema = worksheetCreateSchema.partial();

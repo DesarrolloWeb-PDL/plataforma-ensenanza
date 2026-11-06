@@ -239,15 +239,13 @@ export const worksheets = pgTable(
     id: uuid("id").defaultRandom().primaryKey(),
     lessonId: uuid("lesson_id").references(() => lessons.id, { onDelete: "set null" }),
     trackId: uuid("track_id").references(() => tracks.id, { onDelete: "set null" }),
-    version: integer("version").notNull().default(1),
     title: text("title").notNull(),
-    sourceMdPath: text("source_md_path").notNull(),
-    pdfAssetId: uuid("pdf_asset_id").notNull().references(() => fileAssets.id, { onDelete: "restrict" }),
-    answerKeyAssetId: uuid("answer_key_asset_id").references(() => fileAssets.id, { onDelete: "set null" }),
-    status: text("status").notNull().default("draft"),
+    fileKey: text("file_key").notNull(),
+    answerKeyFileKey: text("answer_key_file_key"),
+    printable: boolean("printable").notNull().default(true),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [index("worksheets_track_version_idx").on(t.trackId, t.version)],
+  (t) => [index("worksheets_track_idx").on(t.trackId)],
 );
 
 export const badges = pgTable("badges", {

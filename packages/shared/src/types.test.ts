@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { assignmentSchema, attendanceSchema, gradeSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, submissionSchema, trackSchema } from "./types";
+import { assignmentSchema, attendanceSchema, gradeSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, submissionSchema, trackSchema, worksheetSchema } from "./types";
 
 describe("shared track/level/lesson schemas", () => {
   it("validates a track", () => {
@@ -129,6 +129,26 @@ describe("shared live class schemas", () => {
 
   it("rejects invalid live class", () => {
     const result = liveClassSchema.safeParse({ id: "not-uuid", title: "" });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe("shared worksheet schemas", () => {
+  it("validates a worksheet", () => {
+    const result = worksheetSchema.safeParse({
+      id: "123e4567-e89b-12d3-a456-426614174000",
+      trackId: "123e4567-e89b-12d3-a456-426614174001",
+      lessonId: null,
+      title: "Hoja 1",
+      fileKey: "worksheets/sample.txt",
+      answerKeyFileKey: "worksheets/sample-key.txt",
+      printable: true,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects invalid worksheet", () => {
+    const result = worksheetSchema.safeParse({ id: "not-uuid", title: "" });
     expect(result.success).toBe(false);
   });
 });
