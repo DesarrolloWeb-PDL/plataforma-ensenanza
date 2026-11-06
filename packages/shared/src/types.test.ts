@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { assignmentSchema, attendanceSchema, dashboardSummarySchema, gradeSchema, gradingQueueItemSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, parentSummarySchema, rosterEntrySchema, submissionSchema, trackSchema, worksheetSchema } from "./types";
+import { assignmentSchema, attendanceSchema, badgeSchema, consentStatusSchema, dashboardSummarySchema, gradeSchema, gradingQueueItemSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, parentSummarySchema, rosterEntrySchema, streakSchema, submissionSchema, trackSchema, worksheetSchema, xpSummarySchema } from "./types";
 
 describe("shared track/level/lesson schemas", () => {
   it("validates a track", () => {
@@ -195,6 +195,52 @@ describe("shared dashboard schemas", () => {
 
   it("rejects invalid roster entry", () => {
     const result = rosterEntrySchema.safeParse({ userId: "not-uuid", name: "" });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe("shared gamification schemas", () => {
+  it("validates a badge", () => {
+    const result = badgeSchema.safeParse({
+      id: "123e4567-e89b-12d3-a456-426614174000",
+      slug: "first-lesson",
+      name: "Primera leccion",
+      criteria: { lessons: 1 },
+      trackId: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates a streak", () => {
+    const result = streakSchema.safeParse({
+      userId: "123e4567-e89b-12d3-a456-426614174000",
+      current: 3,
+      longest: 5,
+      lastActivityDate: "2026-01-01",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates an xp summary", () => {
+    const result = xpSummarySchema.safeParse({
+      userId: "123e4567-e89b-12d3-a456-426614174000",
+      totalXp: 120,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates a consent status", () => {
+    const result = consentStatusSchema.safeParse({
+      userId: "123e4567-e89b-12d3-a456-426614174000",
+      consentStatus: "granted",
+      parentUserId: null,
+      links: [],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects invalid badge", () => {
+    const result = badgeSchema.safeParse({ id: "not-uuid", slug: "", name: "" });
     expect(result.success).toBe(false);
   });
 });

@@ -467,3 +467,71 @@ export const parentSummarySchema = z.object({
   completedLessons: z.number().int().nonnegative(),
   completedLevels: z.number().int().nonnegative(),
 });
+
+export interface Badge {
+  id: string;
+  slug: string;
+  name: string;
+  criteria: unknown;
+  trackId: string | null;
+}
+
+export interface Streak {
+  userId: string;
+  current: number;
+  longest: number;
+  lastActivityDate: string | null;
+}
+
+export interface XpSummary {
+  userId: string;
+  totalXp: number;
+}
+
+export interface ConsentLink {
+  parentId: string;
+  childId: string;
+  consentedAt: string | null;
+  revokedAt: string | null;
+}
+
+export interface ConsentStatus {
+  userId: string;
+  consentStatus: string;
+  parentUserId: string | null;
+  links: ConsentLink[];
+}
+
+export const badgeSchema = z.object({
+  id: z.string().uuid(),
+  slug: z.string().min(1),
+  name: z.string().min(1),
+  criteria: z.unknown(),
+  trackId: z.string().uuid().nullable(),
+});
+
+export const streakSchema = z.object({
+  userId: z.string().uuid(),
+  current: z.number().int().nonnegative(),
+  longest: z.number().int().nonnegative(),
+  lastActivityDate: z.string().date().nullable(),
+});
+
+export const xpSummarySchema = z.object({
+  userId: z.string().uuid(),
+  totalXp: z.number().int().nonnegative(),
+});
+
+export const consentLinkSchema = z.object({
+  parentId: z.string().uuid(),
+  childId: z.string().uuid(),
+  consentedAt: z.string().datetime().nullable(),
+  revokedAt: z.string().datetime().nullable(),
+});
+
+export const consentStatusSchema = z.object({
+  userId: z.string().uuid(),
+  consentStatus: z.string().min(1),
+  parentUserId: z.string().uuid().nullable(),
+  links: z.array(consentLinkSchema),
+});
