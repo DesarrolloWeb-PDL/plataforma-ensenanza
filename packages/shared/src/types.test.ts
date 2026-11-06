@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { assignmentSchema, gradeSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, submissionSchema, trackSchema } from "./types";
+import { assignmentSchema, attendanceSchema, gradeSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, submissionSchema, trackSchema } from "./types";
 
 describe("shared track/level/lesson schemas", () => {
   it("validates a track", () => {
@@ -99,5 +99,36 @@ describe("shared assignment schemas", () => {
       rubricScores: { c1: 10 },
     });
     expect(result.success).toBe(true);
+  });
+});
+
+describe("shared live class schemas", () => {
+  it("validates a live class", () => {
+    const result = liveClassSchema.safeParse({
+      id: "123e4567-e89b-12d3-a456-426614174000",
+      classId: "123e4567-e89b-12d3-a456-426614174001",
+      trackId: "123e4567-e89b-12d3-a456-426614174002",
+      title: "Clase en vivo",
+      meetingUrl: "https://meet.example.com/abc",
+      provider: "external-link",
+      scheduledAt: "2026-01-01T00:00:00.000Z",
+      durationMin: 60,
+      recordingUrl: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates attendance", () => {
+    const result = attendanceSchema.safeParse({
+      liveClassId: "123e4567-e89b-12d3-a456-426614174000",
+      userId: "123e4567-e89b-12d3-a456-426614174001",
+      joinedAt: "2026-01-01T00:00:00.000Z",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects invalid live class", () => {
+    const result = liveClassSchema.safeParse({ id: "not-uuid", title: "" });
+    expect(result.success).toBe(false);
   });
 });

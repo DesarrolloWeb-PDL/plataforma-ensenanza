@@ -326,3 +326,51 @@ export const signedUploadSchema = z.object({
   key: z.string().min(1).optional(),
   contentType: z.string().min(1).optional(),
 });
+
+export interface LiveClass {
+  id: string;
+  classId: string;
+  trackId: string;
+  title: string;
+  meetingUrl: string;
+  provider: string;
+  scheduledAt: string;
+  durationMin: number;
+  recordingUrl?: string | null;
+}
+
+export interface Attendance {
+  liveClassId: string;
+  userId: string;
+  joinedAt: string;
+}
+
+export const liveClassSchema = z.object({
+  id: z.string().uuid(),
+  classId: z.string().uuid(),
+  trackId: z.string().uuid(),
+  title: z.string().min(1),
+  meetingUrl: z.string().url(),
+  provider: z.string().min(1),
+  scheduledAt: z.string().datetime(),
+  durationMin: z.number().int().nonnegative(),
+  recordingUrl: z.string().url().nullable().optional(),
+});
+
+export const attendanceSchema = z.object({
+  liveClassId: z.string().uuid(),
+  userId: z.string().uuid(),
+  joinedAt: z.string().datetime(),
+});
+
+export const liveClassCreateSchema = z.object({
+  classId: z.string().uuid(),
+  title: z.string().min(1),
+  scheduledAt: z.string().datetime(),
+  durationMin: z.number().int().positive(),
+  meetingUrl: z.string().url(),
+  provider: z.string().min(1).optional(),
+  recordingUrl: z.string().url().nullable().optional(),
+});
+
+export const liveClassUpdateSchema = liveClassCreateSchema.partial();
