@@ -269,6 +269,7 @@ export async function registerAssignmentsRoutes(app: FastifyInstance, ctx: Ctx):
       sendError(reply, 500, ERROR_CODES.INTERNAL_ERROR, "No se pudo registrar el envío");
       return;
     }
+    ctx.posthog?.capture({ distinctId: request.user!.sub, event: "assignment_submitted", properties: { assignment_id: assignment.id } });
     reply.code(201).send({ data: toSubmission(row) });
   });
 

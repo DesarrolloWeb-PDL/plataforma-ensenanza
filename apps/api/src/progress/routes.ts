@@ -92,6 +92,7 @@ export async function registerProgressRoutes(app: FastifyInstance, ctx: AuthCont
       sendError(reply, 500, ERROR_CODES.INTERNAL_ERROR, "No se pudo registrar el progreso");
       return;
     }
+    ctx.posthog?.capture({ distinctId: request.user!.sub, event: "lesson_completed", properties: { lesson_id: parsed.data.id } });
     reply.send({ data: toLessonProgress(row) });
   });
 

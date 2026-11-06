@@ -4,6 +4,7 @@ import cors from "@fastify/cors";
 import { loadEnv, type Env } from "./env";
 import { createDb, type Db } from "@plataforma/db";
 import { createStorageProvider, type StorageProvider } from "@plataforma/storage";
+import { createPostHog } from "./analytics/posthog";
 import { registerAuthRoutes } from "./auth/routes";
 import { registerTracksRoutes } from "./tracks/routes";
 import { registerProgressRoutes } from "./progress/routes";
@@ -17,6 +18,7 @@ export interface AppContext {
   env: Env;
   db: Db | undefined;
   storage: StorageProvider;
+  posthog?: import("posthog-node").PostHog | undefined;
 }
 
 export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; context: AppContext }> {
@@ -37,13 +39,15 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
     forceLocal: env.R2_FORCE_LOCAL,
   });
 
+  const posthog = createPostHog(env.POSTHOG_KEY, env.POSTHOG_HOST);
+
   app.get("/health", async () => ({
     status: "ok",
     service: "api",
     env: env.NODE_ENV,
   }));
 
-  const context: AppContext = { env, db, storage };
+  const context: AppContext = { env, db, storage, posthog };
   await registerAuthRoutes(app, context);
   await registerTracksRoutes(app, context);
   await registerProgressRoutes(app, context);

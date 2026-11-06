@@ -101,6 +101,7 @@ export async function registerAuthRoutes(app: FastifyInstance, ctx: AuthContext)
     }
 
     const tokens = issueTokens(created, ctx.env);
+    ctx.posthog?.capture({ distinctId: created.id, event: "signup", properties: { role: resolvedRole } });
     reply.code(201).send({ data: { user: toUser(created), tokens } });
   });
 

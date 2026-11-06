@@ -27,6 +27,7 @@
     "bcryptjs": "^3.0.3",
     "drizzle-orm": "0.36.4",
     "fastify": "^5.12.8",
+    "posthog-node": "^5.62.0",
     "zod": "^4.6.7"
   }
 }

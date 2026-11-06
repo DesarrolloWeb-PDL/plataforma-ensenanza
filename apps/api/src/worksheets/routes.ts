@@ -188,6 +188,7 @@ export async function registerWorksheetsRoutes(app: FastifyInstance, ctx: Ctx): 
       return;
     }
     const result = await ctx.storage.getSignedDownloadUrl(worksheet.fileKey);
+    ctx.posthog?.capture({ distinctId: "anonymous", event: "worksheet_downloaded", properties: { worksheet_id: parsed.data.id } });
     reply.send({ data: result });
   });
 

@@ -12,6 +12,8 @@ const envSchema = z.object({
   R2_BUCKET_WORKSHEETS: z.string().default("worksheets-public"),
   R2_BUCKET_SUBMISSIONS: z.string().default("submissions-private"),
   R2_FORCE_LOCAL: z.coerce.boolean().default(false),
+  POSTHOG_KEY: z.string().optional(),
+  POSTHOG_HOST: z.string().default("https://us.i.posthog.com"),
   JWT_ACCESS_SECRET: z.string().min(1).default("dev-access-secret-change-me"),
   JWT_REFRESH_SECRET: z.string().min(1).default("dev-refresh-secret-change-me"),
   JWT_ACCESS_TTL_SECONDS: z.coerce.number().int().positive().default(900),

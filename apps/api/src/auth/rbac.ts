@@ -1,6 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import type { Db } from "@plataforma/db";
 import type { Env } from "../env";
+import type { PostHog } from "posthog-node";
 import type { JwtPayload } from "./jwt";
 import { verifyJwt } from "./jwt";
 import { ERROR_CODES } from "@plataforma/shared";
@@ -14,6 +15,7 @@ declare module "fastify" {
 export interface AuthContext {
   env: Env;
   db: Db | undefined;
+  posthog?: PostHog | undefined;
 }
 
 export function sendError(
