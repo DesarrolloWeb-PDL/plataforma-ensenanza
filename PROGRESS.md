@@ -108,3 +108,17 @@ Implement XP/streaks/badges awarding, consent flow (parent linkage, consent flag
 ### Next Steps
 - Add badge awarding rules for additional achievements.
 - Add XP leaderboard and richer consent management UI.
+## Slice 13: PWA & Observability
+
+### Goal
+Implement PWA support (manifest, service worker, offline fallback) and PostHog analytics (client + server) with key event tracking.
+
+### Accomplished
+- Web: added public/manifest.json, public/icon.svg, public/offline.html, public/sw.js; service worker registration component; manifest/theme links in locale layout.
+- Web: added PostHog provider and tracking for lesson complete, assignment submit, worksheet download.
+- API: added optional PostHog client via POSTHOG_KEY/POSTHOG_HOST env vars; capture signup, lesson complete, assignment submit, worksheet download.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add richer offline caching for worksheets and app shell.
+- Expand PostHog dashboards and user identification.
