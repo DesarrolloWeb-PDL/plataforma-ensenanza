@@ -45,3 +45,18 @@ Implement assignments CRUD, submissions (code/file/quiz), manual grading with ru
 ### Next Steps
 - Teacher grading UI (deferred).
 - Enrollment/ownership checks for assignments.
+
+## Slice 9: Live Classes
+
+### Goal
+Implement external-link live classes CRUD, attendance, recording link, MeetingProvider adapter, web UI, shared types/tests.
+
+### Accomplished
+- Shared: added LiveClass and Attendance interfaces and zod schemas; tests.
+- API: added `apps/api/src/live-classes/routes.ts` and registered in app; CRUD, attendance/join, recording link, MeetingProvider adapter.
+- Web: added live classes list and detail pages with join button.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Embedded provider implementation (future).
+- Teacher attendance management UI.
