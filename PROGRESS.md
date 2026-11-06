@@ -92,3 +92,19 @@ Implement teacher dashboard (classes, roster, progress view, grading queue, rubr
 ### Next Steps
 - Add teacher grading actions in dashboard.
 - Add richer charts/summaries.
+
+## Slice 12: Gamification & Consent
+
+### Goal
+Implement XP/streaks/badges awarding, consent flow (parent linkage, consent flags), web UI, and shared types/tests.
+
+### Accomplished
+- DB: added `user_xp` and `minor_consents` tables; migration `0003_gamification_consent`.
+- Shared: added `XpSummary`, `Badge`, `Streak`, `ConsentStatus` interfaces and zod schemas; tests.
+- API: added `apps/api/src/gamification/routes.ts` with `/me/xp`, `/me/badges`, `/me/streak/check-in`, consent link/grant/revoke/status; integrated XP/badge/streak awarding into progress completion.
+- Web: added `XpDisplay`, `BadgeList`, gamification and consent pages.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add badge awarding rules for additional achievements.
+- Add XP leaderboard and richer consent management UI.
