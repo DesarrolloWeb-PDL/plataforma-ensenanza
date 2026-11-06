@@ -14,5 +14,19 @@ Implement read API for tracks/levels/lessons, shared types, MDX content loader, 
 - Verification: typecheck, lint, test, web build passed.
 
 ### Next Steps
-- Add progress tracking endpoints (slice 7).
-- Add auth-gated content completion.
+- Add progress tracking endpoints (slice 7). (done)
+- Add auth-gated content completion. (done)
+
+## Slice 7: Progress Tracking
+
+### Goal
+Implement progress tracking endpoints, auth-gated lesson/level completion, web progress indicators, and shared types/tests.
+
+### Accomplished
+- Shared: added LessonProgress and LevelCompletion interfaces and zod schemas; tests.
+- API: added `apps/api/src/progress/routes.ts` and registered in app; completion + progress endpoints.
+- Web: added ProgressButton component and indicators on lesson/level pages.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add assignments/submissions flow (slice 8).
