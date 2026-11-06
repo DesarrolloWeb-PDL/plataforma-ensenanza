@@ -29,4 +29,19 @@ Implement progress tracking endpoints, auth-gated lesson/level completion, web p
 - Verification: typecheck, lint, test, web build passed.
 
 ### Next Steps
-- Add assignments/submissions flow (slice 8).
+- Add assignments/submissions flow (slice 8). (done)
+
+## Slice 8: Assignments & Manual Grading
+
+### Goal
+Implement assignments CRUD, submissions (code/file/quiz), manual grading with rubrics, web submission form, shared types/tests, and signed upload endpoint.
+
+### Accomplished
+- Shared: added Assignment, Submission, Grade, Rubric interfaces and zod schemas; tests.
+- API: added `apps/api/src/assignments/routes.ts` and registered in app; CRUD, submit, grade, list submissions, signed upload.
+- Web: added assignment detail page with submission form.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Teacher grading UI (deferred).
+- Enrollment/ownership checks for assignments.
