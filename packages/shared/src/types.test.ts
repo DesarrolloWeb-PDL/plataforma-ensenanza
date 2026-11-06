@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { assignmentSchema, attendanceSchema, gradeSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, submissionSchema, trackSchema, worksheetSchema } from "./types";
+import { assignmentSchema, attendanceSchema, dashboardSummarySchema, gradeSchema, gradingQueueItemSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, parentSummarySchema, rosterEntrySchema, submissionSchema, trackSchema, worksheetSchema } from "./types";
 
 describe("shared track/level/lesson schemas", () => {
   it("validates a track", () => {
@@ -149,6 +149,52 @@ describe("shared worksheet schemas", () => {
 
   it("rejects invalid worksheet", () => {
     const result = worksheetSchema.safeParse({ id: "not-uuid", title: "" });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe("shared dashboard schemas", () => {
+  it("validates dashboard summary", () => {
+    const result = dashboardSummarySchema.safeParse({ classesCount: 2, studentsCount: 10, pendingGrading: 3 });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates roster entry", () => {
+    const result = rosterEntrySchema.safeParse({
+      userId: "123e4567-e89b-12d3-a456-426614174000",
+      name: "Alumno",
+      email: "a@b.com",
+      role: "student",
+      enrolledAt: "2026-01-01T00:00:00.000Z",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates grading queue item", () => {
+    const result = gradingQueueItemSchema.safeParse({
+      submissionId: "123e4567-e89b-12d3-a456-426614174002",
+      assignmentId: "123e4567-e89b-12d3-a456-426614174000",
+      assignmentTitle: "Tarea",
+      studentId: "123e4567-e89b-12d3-a456-426614174001",
+      studentName: "Alumno",
+      submittedAt: "2026-01-01T00:00:00.000Z",
+      status: "submitted",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates parent summary", () => {
+    const result = parentSummarySchema.safeParse({
+      childId: "123e4567-e89b-12d3-a456-426614174000",
+      childName: "Hijo",
+      completedLessons: 5,
+      completedLevels: 1,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects invalid roster entry", () => {
+    const result = rosterEntrySchema.safeParse({ userId: "not-uuid", name: "" });
     expect(result.success).toBe(false);
   });
 });

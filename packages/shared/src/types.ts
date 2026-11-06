@@ -405,3 +405,65 @@ export const worksheetCreateSchema = z.object({
 });
 
 export const worksheetUpdateSchema = worksheetCreateSchema.partial();
+
+export interface DashboardSummary {
+  classesCount: number;
+  studentsCount: number;
+  pendingGrading: number;
+}
+
+export interface RosterEntry {
+  userId: string;
+  name: string;
+  email: string;
+  role: string;
+  enrolledAt: string;
+}
+
+export interface GradingQueueItem {
+  submissionId: string;
+  assignmentId: string;
+  assignmentTitle: string;
+  studentId: string;
+  studentName: string;
+  submittedAt: string;
+  status: string;
+}
+
+export interface ParentSummary {
+  childId: string;
+  childName: string;
+  completedLessons: number;
+  completedLevels: number;
+}
+
+export const dashboardSummarySchema = z.object({
+  classesCount: z.number().int().nonnegative(),
+  studentsCount: z.number().int().nonnegative(),
+  pendingGrading: z.number().int().nonnegative(),
+});
+
+export const rosterEntrySchema = z.object({
+  userId: z.string().uuid(),
+  name: z.string().min(1),
+  email: z.string().email(),
+  role: z.string().min(1),
+  enrolledAt: z.string().datetime(),
+});
+
+export const gradingQueueItemSchema = z.object({
+  submissionId: z.string().uuid(),
+  assignmentId: z.string().uuid(),
+  assignmentTitle: z.string().min(1),
+  studentId: z.string().uuid(),
+  studentName: z.string().min(1),
+  submittedAt: z.string().datetime(),
+  status: z.string().min(1),
+});
+
+export const parentSummarySchema = z.object({
+  childId: z.string().uuid(),
+  childName: z.string().min(1),
+  completedLessons: z.number().int().nonnegative(),
+  completedLevels: z.number().int().nonnegative(),
+});
