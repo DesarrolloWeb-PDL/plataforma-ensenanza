@@ -12,10 +12,14 @@ interface Track {
 }
 
 async function fetchTracks(): Promise<Track[]> {
-  const res = await fetch(`${API_BASE}/api/v1/tracks`, { cache: "no-store" });
-  if (!res.ok) return [];
-  const json = (await res.json()) as { data: Track[] };
-  return json.data;
+  try {
+    const res = await fetch(`${API_BASE}/api/v1/tracks`, { cache: "no-store" });
+    if (!res.ok) return [];
+    const json = (await res.json()) as { data: Track[] };
+    return json.data;
+  } catch {
+    return [];
+  }
 }
 
 export default async function TracksPage() {

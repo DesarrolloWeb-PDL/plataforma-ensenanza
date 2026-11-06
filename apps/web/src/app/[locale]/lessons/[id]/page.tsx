@@ -16,10 +16,14 @@ interface Lesson {
 }
 
 async function fetchLesson(id: string): Promise<Lesson | null> {
-  const res = await fetch(`${API_BASE}/api/v1/lessons/${id}`, { cache: "no-store" });
-  if (!res.ok) return null;
-  const json = (await res.json()) as { data: Lesson };
-  return json.data;
+  try {
+    const res = await fetch(`${API_BASE}/api/v1/lessons/${id}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { data: Lesson };
+    return json.data;
+  } catch {
+    return null;
+  }
 }
 
 export default async function LessonPage({ params }: { params: { id: string } }) {
