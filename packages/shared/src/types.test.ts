@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { assignmentSchema, attendanceSchema, badgeSchema, consentStatusSchema, dashboardSummarySchema, gradeSchema, gradingQueueItemSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, liveClassSchema, parentSummarySchema, rosterEntrySchema, streakSchema, submissionSchema, trackSchema, worksheetSchema, xpSummarySchema } from "./types";
+import { assignmentSchema, attendanceSchema, badgeSchema, consentStatusSchema, dashboardSummarySchema, gradeSchema, gradingQueueItemSchema, lessonProgressSchema, lessonSchema, levelCompletionSchema, levelSchema, linkMinorSchema, liveClassSchema, loginSchema, parentSummarySchema, registerSchema, rosterEntrySchema, streakSchema, submissionSchema, trackSchema, worksheetSchema, xpSummarySchema } from "./types";
 
 describe("shared track/level/lesson schemas", () => {
   it("validates a track", () => {
@@ -242,5 +242,26 @@ describe("shared gamification schemas", () => {
   it("rejects invalid badge", () => {
     const result = badgeSchema.safeParse({ id: "not-uuid", slug: "", name: "" });
     expect(result.success).toBe(false);
+  });
+});
+describe("shared auth schemas edge cases", () => {
+  it("rejects short password in register", () => {
+    const result = registerSchema.safeParse({ email: "a@b.com", password: "short", name: "X" });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects invalid email in login", () => {
+    const result = loginSchema.safeParse({ email: "not-email", password: "secret123" });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects non-uuid linkMinor", () => {
+    const result = linkMinorSchema.safeParse({ parentId: "x", childId: "y" });
+    expect(result.success).toBe(false);
+  });
+
+  it("accepts minimal register", () => {
+    const result = registerSchema.safeParse({ email: "a@b.com", password: "longenough", name: "X" });
+    expect(result.success).toBe(true);
   });
 });
