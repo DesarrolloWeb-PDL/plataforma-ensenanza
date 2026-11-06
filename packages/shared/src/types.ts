@@ -188,3 +188,141 @@ export const levelCompletionSchema = z.object({
   completedAt: z.string().datetime().nullable(),
   approvedBy: z.string().uuid().nullable(),
 });
+
+export interface RubricCriterion {
+  name: string;
+  points: number;
+  description?: string;
+}
+
+export interface Rubric {
+  id: string;
+  ownerId: string;
+  title: string;
+  criteria: RubricCriterion[];
+  totalPoints: number;
+  reusable: boolean;
+  createdAt: string;
+}
+
+export interface Assignment {
+  id: string;
+  classId: string;
+  lessonId: string | null;
+  type: string;
+  title: string;
+  instructionsMd: string;
+  dueAt: string | null;
+  maxScore: number;
+  rubricId: string | null;
+  maxResubmissions: number;
+  status: string;
+  createdAt: string;
+}
+
+export interface Submission {
+  id: string;
+  assignmentId: string;
+  studentId: string;
+  version: number;
+  status: string;
+  payload: unknown;
+  submittedAt: string;
+  idempotencyKey: string;
+}
+
+export interface Grade {
+  id: string;
+  submissionId: string;
+  score: number;
+  feedback: string;
+  gradedBy: string;
+  gradedAt: string;
+  rubricScores: unknown;
+}
+
+export const rubricCriterionSchema = z.object({
+  name: z.string().min(1),
+  points: z.number().int().nonnegative(),
+  description: z.string().optional(),
+});
+
+export const rubricSchema = z.object({
+  id: z.string().uuid(),
+  ownerId: z.string().uuid(),
+  title: z.string().min(1),
+  criteria: z.array(rubricCriterionSchema),
+  totalPoints: z.number().int().nonnegative(),
+  reusable: z.boolean(),
+  createdAt: z.string().datetime(),
+});
+
+export const assignmentSchema = z.object({
+  id: z.string().uuid(),
+  classId: z.string().uuid(),
+  lessonId: z.string().uuid().nullable(),
+  type: z.string().min(1),
+  title: z.string().min(1),
+  instructionsMd: z.string(),
+  dueAt: z.string().datetime().nullable(),
+  maxScore: z.number().int().nonnegative(),
+  rubricId: z.string().uuid().nullable(),
+  maxResubmissions: z.number().int().nonnegative(),
+  status: z.string().min(1),
+  createdAt: z.string().datetime(),
+});
+
+export const submissionSchema = z.object({
+  id: z.string().uuid(),
+  assignmentId: z.string().uuid(),
+  studentId: z.string().uuid(),
+  version: z.number().int().positive(),
+  status: z.string().min(1),
+  payload: z.unknown(),
+  submittedAt: z.string().datetime(),
+  idempotencyKey: z.string().min(1),
+});
+
+export const gradeSchema = z.object({
+  id: z.string().uuid(),
+  submissionId: z.string().uuid(),
+  score: z.number().int().nonnegative(),
+  feedback: z.string(),
+  gradedBy: z.string().uuid(),
+  gradedAt: z.string().datetime(),
+  rubricScores: z.unknown(),
+});
+
+export const assignmentCreateSchema = z.object({
+  classId: z.string().uuid(),
+  lessonId: z.string().uuid().nullable().optional(),
+  type: z.enum(["code", "file", "quiz"]).optional(),
+  title: z.string().min(1),
+  instructionsMd: z.string().optional(),
+  dueAt: z.string().datetime().nullable().optional(),
+  maxScore: z.number().int().nonnegative().optional(),
+  rubricId: z.string().uuid().nullable().optional(),
+  maxResubmissions: z.number().int().nonnegative().optional(),
+  status: z.enum(["draft", "published"]).optional(),
+});
+
+export const assignmentUpdateSchema = assignmentCreateSchema.partial();
+
+export const submitAssignmentSchema = z.object({
+  type: z.enum(["code", "file", "quiz"]),
+  content: z.string().optional(),
+  fileKey: z.string().optional(),
+  answers: z.array(z.unknown()).optional(),
+  idempotencyKey: z.string().min(1).optional(),
+});
+
+export const gradeSubmissionSchema = z.object({
+  score: z.number().int().nonnegative(),
+  feedback: z.string().optional(),
+  rubricScores: z.record(z.string(), z.number()).optional(),
+});
+
+export const signedUploadSchema = z.object({
+  key: z.string().min(1).optional(),
+  contentType: z.string().min(1).optional(),
+});
