@@ -22,16 +22,19 @@ async function main() {
   ]);
 
   const allLevels = await db.select().from(levels);
+  const allTracks = await db.select().from(tracks);
+  const trackById = new Map(allTracks.map((t) => [t.id, t.slug]));
   await db.insert(lessons).values(
-    allLevels.flatMap((lvl) =>
-      [1, 2, 3].map((n) => ({
+    allLevels.flatMap((lvl) => {
+      const trackSlug = trackById.get(lvl.trackId) ?? "track";
+      return [1, 2, 3].map((n) => ({
         trackId: lvl.trackId,
         levelId: lvl.id,
         order: n,
         title: `Leccion ${n}`,
-        mdxRef: `content/${lvl.id}/lesson-${n}.mdx`,
-      })),
-    ),
+        mdxRef: `content/${trackSlug}/level-${lvl.order}/lesson-${n}.mdx`,
+      }));
+    }),
   );
 
   await db.insert(badges).values([
