@@ -102,3 +102,53 @@ export const linkMinorSchema = z.object({
   childId: z.string().uuid(),
   granted: z.boolean().optional(),
 });
+
+export interface Track {
+  id: string;
+  slug: string;
+  name: string;
+  ageBand: string;
+  order: number;
+}
+
+export interface Level {
+  id: string;
+  trackId: string;
+  order: number;
+  title: string;
+  projectTitle: string;
+}
+
+export interface Lesson {
+  id: string;
+  trackId: string;
+  levelId: string;
+  order: number;
+  title: string;
+  mdxRef: string;
+}
+
+export const trackSchema = z.object({
+  id: z.string().uuid(),
+  slug: z.string().min(1),
+  name: z.string().min(1),
+  ageBand: z.string().min(1),
+  order: z.number().int(),
+});
+
+export const levelSchema = z.object({
+  id: z.string().uuid(),
+  trackId: z.string().uuid(),
+  order: z.number().int(),
+  title: z.string().min(1),
+  projectTitle: z.string().min(1),
+});
+
+export const lessonSchema = z.object({
+  id: z.string().uuid(),
+  trackId: z.string().uuid(),
+  levelId: z.string().uuid(),
+  order: z.number().int(),
+  title: z.string().min(1),
+  mdxRef: z.string().min(1),
+});
