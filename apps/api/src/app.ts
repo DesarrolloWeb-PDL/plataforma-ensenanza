@@ -3,10 +3,11 @@ import cors from "@fastify/cors";
 
 import { loadEnv, type Env } from "./env";
 import { createDb, type Db } from "@plataforma/db";
+import { registerAuthRoutes } from "./auth/routes";
 
 export interface AppContext {
   env: Env;
-  db?: Db | undefined;
+  db: Db | undefined;
 }
 
 export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; context: AppContext }> {
@@ -26,5 +27,7 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
   }));
 
   const context: AppContext = { env, db };
+  await registerAuthRoutes(app, context);
+
   return { app, context };
 }
