@@ -184,6 +184,7 @@ export const assignments = pgTable(
     dueAt: timestamp("due_at", { withTimezone: true }),
     maxScore: integer("max_score").notNull().default(100),
     rubricId: uuid("rubric_id").references(() => rubrics.id, { onDelete: "set null" }),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
     maxResubmissions: integer("max_resubmissions").notNull().default(2),
     status: text("status").notNull().default("draft"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
