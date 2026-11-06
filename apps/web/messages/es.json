@@ -5,5 +5,14 @@
   },
   "metadata": {
     "title": "Plataforma de Enseñanza"
+  },
+  "tracks": {
+    "title": "Tracks",
+    "levels": "Niveles",
+    "notFound": "Track no encontrado"
+  },
+  "lessons": {
+    "title": "Lecciones",
+    "notFound": "Lección no encontrada"
   }
 }
