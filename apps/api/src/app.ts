@@ -3,11 +3,13 @@ import cors from "@fastify/cors";
 
 import { loadEnv, type Env } from "./env";
 import { createDb, type Db } from "@plataforma/db";
+import { createStorageProvider, type StorageProvider } from "@plataforma/storage";
 import { registerAuthRoutes } from "./auth/routes";
 
 export interface AppContext {
   env: Env;
   db: Db | undefined;
+  storage: StorageProvider;
 }
 
 export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; context: AppContext }> {
@@ -20,13 +22,21 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
 
   const db = env.DATABASE_URL ? createDb(env.DATABASE_URL) : undefined;
 
+  const storage = createStorageProvider({
+    accountId: env.R2_ACCOUNT_ID,
+    accessKeyId: env.R2_ACCESS_KEY_ID,
+    secretAccessKey: env.R2_SECRET_ACCESS_KEY,
+    bucket: env.R2_BUCKET_SUBMISSIONS,
+    forceLocal: env.R2_FORCE_LOCAL,
+  });
+
   app.get("/health", async () => ({
     status: "ok",
     service: "api",
     env: env.NODE_ENV,
   }));
 
-  const context: AppContext = { env, db };
+  const context: AppContext = { env, db, storage };
   await registerAuthRoutes(app, context);
 
   return { app, context };
