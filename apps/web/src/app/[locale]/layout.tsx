@@ -2,6 +2,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+
 export default async function LocaleLayout({
   children,
   params: { locale },
@@ -12,13 +14,16 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   return (
     <html lang={locale}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2563eb" />
+      </head>
       <body>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ServiceWorkerRegister />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
-}
-
-export function generateStaticParams() {
-  return [{ locale: "es" }];
 }
