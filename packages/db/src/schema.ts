@@ -287,3 +287,22 @@ export const streaks = pgTable("streaks", {
   longestDays: integer("longest_days").notNull().default(0),
   lastActivityDate: date("last_activity_date"),
 });
+
+export const userXp = pgTable("user_xp", {
+  userId: uuid("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  totalXp: integer("total_xp").notNull().default(0),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const minorConsents = pgTable(
+  "minor_consents",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    minorUserId: uuid("minor_user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    parentUserId: uuid("parent_user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    consentedAt: timestamp("consented_at", { withTimezone: true }),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("minor_consents_pair_uq").on(t.minorUserId, t.parentUserId)],
+);
