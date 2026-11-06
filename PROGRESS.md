@@ -138,3 +138,21 @@ Provide a sandboxed iframe (+ optional Web Worker) to run user HTML/JS for the t
 ### Next Steps
 - Add server-side validation/sanitization if running untrusted code in production.
 - Add richer output capture and error stack display.
+
+## Slice 15: Grading UI + Ownership Checks
+
+### Goal
+Implement teacher grading UI with rubric form, ownership/enrollment guards in API, and helper tests.
+
+### Accomplished
+- API: added `apps/api/src/lib/ownership.ts` helper with teacher/student ownership checks.
+- API: enforced ownership/enrollment in assignments/submissions/progress routes (403 on violation).
+- API: assignments now track `createdBy`.
+- Web: added teacher grading page with rubric form at `/dashboard/teacher/grading/[submissionId]`.
+- Web: grading queue links to grading page.
+- Tests: added ownership helper unit tests.
+- Verification: typecheck, lint, test, web build passed.
+
+### Next Steps
+- Add rubric picker and validation in grading UI.
+- Add richer ownership tests for routes.
