@@ -31,7 +31,7 @@ export default function GradingPage({ params }: { params: { submissionId: string
     if (!t) return;
     (async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/v1/submissions/${params.submissionId}`, {
+        const res = await fetch(`${API_BASE}/submissions/${params.submissionId}`, {
           headers: { Authorization: `Bearer ${t}` },
         });
         if (!res.ok) throw new Error("No se pudo cargar el envío");
@@ -60,7 +60,7 @@ export default function GradingPage({ params }: { params: { submissionId: string
       } catch {
         throw new Error("rubricScores debe ser JSON válido");
       }
-      const res = await fetch(`${API_BASE}/api/v1/submissions/${params.submissionId}/grade`, {
+      const res = await fetch(`${API_BASE}/submissions/${params.submissionId}/grade`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

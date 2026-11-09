@@ -19,7 +19,7 @@ export default function GamificationPage() {
     }
     setError(null);
     try {
-      const res = await fetch(`${API_BASE}/api/v1/me/streak/check-in`, {
+      const res = await fetch(`${API_BASE}/me/streak/check-in`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });

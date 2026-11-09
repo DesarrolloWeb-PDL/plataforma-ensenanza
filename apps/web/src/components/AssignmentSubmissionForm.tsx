@@ -34,7 +34,7 @@ export default function AssignmentSubmissionForm({ assignmentId, type }: Props) 
     try {
       let resolvedFileKey = fileKey;
       if (type === "file" && fileName) {
-        const upRes = await fetch(`${API_BASE}/api/v1/storage/signed-upload`, {
+        const upRes = await fetch(`${API_BASE}/storage/signed-upload`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           body: JSON.stringify({ contentType: "application/octet-stream" }),
@@ -55,7 +55,7 @@ export default function AssignmentSubmissionForm({ assignmentId, type }: Props) 
       if (type === "file") body.fileKey = resolvedFileKey || fileName;
       if (type === "quiz") body.answers = answers.split("\n").filter(Boolean);
 
-      const res = await fetch(`${API_BASE}/api/v1/assignments/${assignmentId}/submit`, {
+      const res = await fetch(`${API_BASE}/assignments/${assignmentId}/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(body),

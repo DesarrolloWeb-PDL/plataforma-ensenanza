@@ -18,7 +18,7 @@ export default function ProgressButton({ kind, id }: ProgressButtonProps) {
   useEffect(() => {
     const token = window.localStorage.getItem("accessToken");
     if (!token) return;
-    fetch(`${API_BASE}/api/v1/me/progress`, {
+    fetch(`${API_BASE}/me/progress`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
     })
@@ -44,7 +44,7 @@ export default function ProgressButton({ kind, id }: ProgressButtonProps) {
     setError(null);
     try {
       const endpoint = kind === "lesson" ? `lessons/${id}/complete` : `levels/${id}/complete`;
-      const res = await fetch(`${API_BASE}/api/v1/${endpoint}`, {
+      const res = await fetch(`${API_BASE}/${endpoint}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });

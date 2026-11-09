@@ -58,8 +58,8 @@ export default function TeacherDashboardPage() {
       try {
         const headers = { Authorization: `Bearer ${t}` };
         const [cRes, qRes] = await Promise.all([
-          fetch(`${API_BASE}/api/v1/teacher/classes`, { headers }),
-          fetch(`${API_BASE}/api/v1/teacher/grading-queue`, { headers }),
+          fetch(`${API_BASE}/teacher/classes`, { headers }),
+          fetch(`${API_BASE}/teacher/grading-queue`, { headers }),
         ]);
         if (!cRes.ok || !qRes.ok) throw new Error("No se pudieron cargar los datos");
         const cJson = (await cRes.json()) as { data: ClassItem[] };
@@ -83,8 +83,8 @@ export default function TeacherDashboardPage() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [rRes, pRes] = await Promise.all([
-          fetch(`${API_BASE}/api/v1/teacher/classes/${selected}/roster`, { headers }),
-          fetch(`${API_BASE}/api/v1/teacher/classes/${selected}/progress`, { headers }),
+          fetch(`${API_BASE}/teacher/classes/${selected}/roster`, { headers }),
+          fetch(`${API_BASE}/teacher/classes/${selected}/progress`, { headers }),
         ]);
         if (!rRes.ok || !pRes.ok) throw new Error("No se pudo cargar la clase");
         const rJson = (await rRes.json()) as { data: RosterEntry[] };

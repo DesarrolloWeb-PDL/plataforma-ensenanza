@@ -23,14 +23,14 @@ interface Lesson {
 }
 
 async function fetchLevel(id: string): Promise<Level | null> {
-  const res = await fetch(`${API_BASE}/api/v1/levels/${id}`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/levels/${id}`, { cache: "no-store" });
   if (!res.ok) return null;
   const json = (await res.json()) as { data: Level };
   return json.data;
 }
 
 async function fetchLessons(id: string): Promise<Lesson[]> {
-  const res = await fetch(`${API_BASE}/api/v1/levels/${id}/lessons`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/levels/${id}/lessons`, { cache: "no-store" });
   if (!res.ok) return [];
   const json = (await res.json()) as { data: Lesson[] };
   return json.data;

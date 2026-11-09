@@ -12,7 +12,7 @@ interface Assignment {
 }
 
 async function fetchAssignment(id: string): Promise<Assignment | null> {
-  const res = await fetch(`${API_BASE}/api/v1/assignments/${id}`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/assignments/${id}`, { cache: "no-store" });
   if (!res.ok) return null;
   const json = (await res.json()) as { data: Assignment };
   return json.data;

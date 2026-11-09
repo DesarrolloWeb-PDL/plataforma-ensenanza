@@ -13,7 +13,7 @@ interface Worksheet {
 }
 
 async function fetchWorksheets(): Promise<Worksheet[]> {
-  const res = await fetch(`${API_BASE}/api/v1/worksheets`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/worksheets`, { cache: "no-store" });
   if (!res.ok) return [];
   const json = (await res.json()) as { data: Worksheet[] };
   return json.data ?? [];

@@ -24,7 +24,7 @@ export default function LiveClassJoinButton({ liveClassId, meetingUrl }: Props) 
     setError(null);
     setStatus(null);
     try {
-      const res = await fetch(`${API_BASE}/api/v1/live-classes/${liveClassId}/attend`, {
+      const res = await fetch(`${API_BASE}/live-classes/${liveClassId}/attend`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });

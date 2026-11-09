@@ -16,7 +16,7 @@ export default function XpDisplay() {
   useEffect(() => {
     const token = window.localStorage.getItem("accessToken");
     if (!token) return;
-    fetch(`${API_BASE}/api/v1/me/xp`, {
+    fetch(`${API_BASE}/me/xp`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
     })

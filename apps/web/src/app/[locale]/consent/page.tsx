@@ -23,7 +23,7 @@ export default function ConsentPage() {
     const t = window.localStorage.getItem("accessToken");
     setToken(t);
     if (!t) return;
-    fetch(`${API_BASE}/api/v1/consent/status`, {
+    fetch(`${API_BASE}/consent/status`, {
       headers: { Authorization: `Bearer ${t}` },
       cache: "no-store",
     })
@@ -42,7 +42,7 @@ export default function ConsentPage() {
     setError(null);
     setMessage(null);
     try {
-      const res = await fetch(`${API_BASE}/api/v1${path}`, {
+      const res = await fetch(`${API_BASE}${path}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(body),
@@ -52,7 +52,7 @@ export default function ConsentPage() {
         throw new Error(json?.error?.message ?? "Error");
       }
       setMessage("Operacion realizada");
-      const r = await fetch(`${API_BASE}/api/v1/consent/status`, {
+      const r = await fetch(`${API_BASE}/consent/status`, {
         headers: { Authorization: `Bearer ${token}` },
         cache: "no-store",
       });

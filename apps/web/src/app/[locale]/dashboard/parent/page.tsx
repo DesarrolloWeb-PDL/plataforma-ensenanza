@@ -34,7 +34,7 @@ export default function ParentDashboardPage() {
     (async () => {
       try {
         const headers = { Authorization: `Bearer ${t}` };
-        const cRes = await fetch(`${API_BASE}/api/v1/parent/children`, { headers });
+        const cRes = await fetch(`${API_BASE}/parent/children`, { headers });
         if (!cRes.ok) throw new Error("No se pudieron cargar los hijos");
         const cJson = (await cRes.json()) as { data: Child[] };
         const kids = cJson.data ?? [];
@@ -42,7 +42,7 @@ export default function ParentDashboardPage() {
 
         const results = await Promise.all(
           kids.map(async (kid) => {
-            const r = await fetch(`${API_BASE}/api/v1/parent/children/${kid.id}/progress`, { headers });
+            const r = await fetch(`${API_BASE}/parent/children/${kid.id}/progress`, { headers });
             if (!r.ok) return null;
             const j = (await r.json()) as { data: ChildProgress };
             return j.data;

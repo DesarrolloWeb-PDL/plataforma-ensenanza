@@ -20,14 +20,14 @@ interface Level {
 }
 
 async function fetchTrack(slug: string): Promise<Track | null> {
-  const res = await fetch(`${API_BASE}/api/v1/tracks/${slug}`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/tracks/${slug}`, { cache: "no-store" });
   if (!res.ok) return null;
   const json = (await res.json()) as { data: Track };
   return json.data;
 }
 
 async function fetchLevels(slug: string): Promise<Level[]> {
-  const res = await fetch(`${API_BASE}/api/v1/tracks/${slug}/levels`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/tracks/${slug}/levels`, { cache: "no-store" });
   if (!res.ok) return [];
   const json = (await res.json()) as { data: Level[] };
   return json.data;

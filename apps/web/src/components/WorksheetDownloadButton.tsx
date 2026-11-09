@@ -45,7 +45,7 @@ export default function WorksheetDownloadButton({ worksheetId, label, suffix, te
       const token = window.localStorage.getItem("accessToken");
       const headers: Record<string, string> = {};
       if (token) headers.Authorization = `Bearer ${token}`;
-      const res = await fetch(`${API_BASE}/api/v1/worksheets/${worksheetId}/${suffix}`, { headers });
+      const res = await fetch(`${API_BASE}/worksheets/${worksheetId}/${suffix}`, { headers });
       if (!res.ok) throw new Error("No se pudo obtener el enlace de descarga");
       const json = (await res.json()) as { data: { url: string } };
       window.open(json.data.url, "_blank", "noopener,noreferrer");

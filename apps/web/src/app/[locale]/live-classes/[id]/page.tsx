@@ -15,7 +15,7 @@ interface LiveClass {
 }
 
 async function fetchLiveClass(id: string): Promise<LiveClass | null> {
-  const res = await fetch(`${API_BASE}/api/v1/live-classes/${id}`, { cache: "no-store" });
+  const res = await fetch(`${API_BASE}/live-classes/${id}`, { cache: "no-store" });
   if (!res.ok) return null;
   const json = (await res.json()) as { data: LiveClass };
   return json.data;

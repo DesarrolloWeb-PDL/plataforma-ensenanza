@@ -17,7 +17,7 @@ interface Lesson {
 
 async function fetchLesson(id: string): Promise<Lesson | null> {
   try {
-    const res = await fetch(`${API_BASE}/api/v1/lessons/${id}`, { cache: "no-store" });
+    const res = await fetch(`${API_BASE}/lessons/${id}`, { cache: "no-store" });
     if (!res.ok) return null;
     const json = (await res.json()) as { data: Lesson };
     return json.data;

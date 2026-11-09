@@ -23,7 +23,7 @@ export default function BadgeList() {
       setLoading(false);
       return;
     }
-    fetch(`${API_BASE}/api/v1/me/badges`, {
+    fetch(`${API_BASE}/me/badges`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
     })
