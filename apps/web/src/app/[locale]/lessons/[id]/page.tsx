@@ -52,13 +52,11 @@ export default async function LessonPage({ params }: { params: { id: string; loc
           <p>Practicá la consigna en el editor de Scratch. Si no carga, abrilo en una pestaña nueva.</p>
           <div style={{ border: "3px solid #000", boxShadow: "6px 6px 0 #000", overflow: "hidden" }}>
             <iframe
-              src="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"
-              title="Scratch editor"
+              src="/blockly-sandbox.html"
+              title="Sandbox de bloques"
               width="100%"
               height="480"
               style={{ border: 0, display: "block" }}
-              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-              allow="fullscreen"
             />
           </div>
           <p style={{ marginTop: "0.8rem" }}>

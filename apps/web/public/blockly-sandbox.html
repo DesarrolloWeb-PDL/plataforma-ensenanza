@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Sandbox de bloques</title>
+  <style>
+    body { margin: 0; font-family: "Arial Black", Arial, sans-serif; background: #fef3c7; }
+    #blocklyDiv { height: 420px; width: 100%; border: 3px solid #000; box-sizing: border-box; }
+    .bar { display: flex; gap: 0.6rem; padding: 0.8rem; background: #facc15; border-bottom: 3px solid #000; }
+    button { font-family: inherit; font-weight: 900; text-transform: uppercase; border: 3px solid #000; background: #fff; padding: 0.5rem 1rem; box-shadow: 4px 4px 0 #000; cursor: pointer; }
+    button:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 #000; }
+    #output { padding: 0.8rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <button onclick="runCode()">Ejecutar</button>
+    <button onclick="resetWorkspace()">Limpiar</button>
+  </div>
+  <div id="blocklyDiv"></div>
+  <div id="output">Presioná Ejecutar para ver el resultado.</div>
+
+  <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+  <script>
+    const workspace = Blockly.inject('blocklyDiv', {
+      toolbox: `<xml>
+        <block type="controls_if"></block>
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+        <block type="variables_set"></block>
+        <block type="variables_get"></block>
+      </xml>`
+    });
+
+    function runCode() {
+      const code = Blockly.JavaScript.workspaceToCode(workspace);
+      const out = document.getElementById('output');
+      try {
+        // eslint-disable-next-line no-eval
+        const result = eval(code);
+        out.textContent = "Resultado: " + (result === undefined ? "(sin salida)" : result);
+      } catch (e) {
+        out.textContent = "Error: " + e.message;
+      }
+    }
+
+    function resetWorkspace() {
+      workspace.clear();
+      document.getElementById('output').textContent = "Workspace limpio.";
+    }
+  </script>
+</body>
+</html>
