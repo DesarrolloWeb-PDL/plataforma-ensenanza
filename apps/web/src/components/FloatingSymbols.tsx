@@ -53,7 +53,7 @@ export default function FloatingSymbols() {
   }, []);
 
   return (
-    <div aria-hidden="true" style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: -1 }}>
+    <div aria-hidden="true" style={{ position: "fixed", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
       {symbols.map((s) => (
         <span
           key={s.id}
