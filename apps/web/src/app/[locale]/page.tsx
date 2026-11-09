@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 
+import FloatingSymbols from "@/components/FloatingSymbols";
 import styles from "./page.module.css";
 
 export default async function Home({ params: { locale } }: { params: { locale: string } }) {
@@ -27,6 +28,7 @@ export default async function Home({ params: { locale } }: { params: { locale: s
     <div className={styles.page}>
       {/* Hero */}
       <section className={styles.hero}>
+        <FloatingSymbols />
         <div className={styles.heroContent}>
           <div className={styles.logo}>
             <span className={styles.logoSquares}>
