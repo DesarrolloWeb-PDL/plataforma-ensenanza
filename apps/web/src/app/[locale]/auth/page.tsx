@@ -11,6 +11,7 @@ export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +24,7 @@ export default function AuthPage() {
       const body =
         mode === "login"
           ? { email, password }
-          : { email, password, name, role: "student" };
+          : { email, password, name, role: "student", birthDate: birthDate || null };
       const res = await fetch(`${API_BASE}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -41,7 +42,16 @@ export default function AuthPage() {
       }
       window.localStorage.setItem("accessToken", accessToken);
       window.localStorage.setItem("refreshToken", refreshToken);
-      window.location.href = "/tracks";
+      let target = "/tracks";
+      if (mode === "register" && birthDate) {
+        const birth = new Date(birthDate);
+        const now = new Date();
+        let age = now.getFullYear() - birth.getFullYear();
+        const monthDiff = now.getMonth() - birth.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birth.getDate())) age -= 1;
+        target = age < 13 ? "/tracks/bloques" : "/tracks/html5-ai";
+      }
+      window.location.href = target;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
     } finally {
@@ -54,10 +64,16 @@ export default function AuthPage() {
       <h1>{mode === "login" ? t("login") : t("register")}</h1>
       <form onSubmit={submit} style={{ display: "grid", gap: "1rem", maxWidth: 420 }}>
         {mode === "register" ? (
-          <label>
-            {t("name")}
-            <input value={name} onChange={(e) => setName(e.target.value)} required />
-          </label>
+          <>
+            <label>
+              {t("name")}
+              <input value={name} onChange={(e) => setName(e.target.value)} required />
+            </label>
+            <label>
+              Fecha de nacimiento
+              <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
+            </label>
+          </>
         ) : null}
         <label>
           {t("email")}
