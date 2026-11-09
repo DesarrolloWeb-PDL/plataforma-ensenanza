@@ -2,6 +2,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import "../globals.css";
+
 import PostHogProvider from "@/components/PostHogProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 

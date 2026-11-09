@@ -26,9 +26,6 @@ export default async function Home() {
     <main className={styles.page}>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.blob + " " + styles.blob1} />
-        <div className={styles.blob + " " + styles.blob2} />
-        <div className={styles.blob + " " + styles.blob3} />
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>{t("title")}</h1>
           <p className={styles.heroSubtitle}>{t("subtitle")}</p>

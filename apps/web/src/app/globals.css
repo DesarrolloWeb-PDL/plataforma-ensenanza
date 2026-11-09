@@ -1,0 +1,96 @@
+/* Brutalist base for plataforma-ensenanza */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --brutal-bg: #fef3c7;
+  --brutal-ink: #000000;
+  --brutal-yellow: #facc15;
+  --brutal-pink: #f472b6;
+  --brutal-cyan: #22d3ee;
+  --brutal-green: #4ade80;
+  --brutal-orange: #fb923c;
+  --brutal-purple: #a78bfa;
+  --brutal-border: 3px solid #000000;
+  --brutal-shadow: 6px 6px 0 #000000;
+  --brutal-shadow-sm: 4px 4px 0 #000000;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--brutal-bg);
+  color: var(--brutal-ink);
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 0.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+p { margin: 0 0 1rem; }
+
+a { color: inherit; }
+
+button,
+a.brutal-btn {
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: var(--brutal-border);
+  background: var(--brutal-yellow);
+  color: #000;
+  padding: 0.7rem 1.2rem;
+  box-shadow: var(--brutal-shadow-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+button:hover,
+a.brutal-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.brutal-card {
+  border: var(--brutal-border);
+  background: #fff;
+  box-shadow: var(--brutal-shadow);
+  padding: 1.2rem;
+}
+
+.brutal-input,
+input,
+textarea,
+select {
+  font-family: inherit;
+  border: var(--brutal-border);
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  box-shadow: var(--brutal-shadow-sm);
+  width: 100%;
+}
+
+img {
+  border: var(--brutal-border);
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: var(--brutal-pink);
+  color: #000;
+}
