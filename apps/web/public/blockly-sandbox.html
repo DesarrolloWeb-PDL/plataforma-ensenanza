@@ -24,14 +24,41 @@
   <script>
     const workspace = Blockly.inject('blocklyDiv', {
       toolbox: `<xml>
-        <block type="controls_if"></block>
-        <block type="logic_compare"></block>
-        <block type="math_number"></block>
-        <block type="math_arithmetic"></block>
-        <block type="text"></block>
-        <block type="text_print"></block>
-        <block type="variables_set"></block>
-        <block type="variables_get"></block>
+        <category name="Control" colour="#5b80a5">
+          <block type="controls_if"></block>
+          <block type="controls_repeat_ext"></block>
+          <block type="controls_whileUntil"></block>
+          <block type="controls_for"></block>
+        </category>
+        <category name="Lógica" colour="#5b67a5">
+          <block type="logic_compare"></block>
+          <block type="logic_operation"></block>
+          <block type="logic_negate"></block>
+          <block type="logic_boolean"></block>
+        </category>
+        <category name="Matemática" colour="#5b9aa5">
+          <block type="math_number"></block>
+          <block type="math_arithmetic"></block>
+          <block type="math_single"></block>
+          <block type="math_round"></block>
+          <block type="math_modulo"></block>
+          <block type="math_random_int"></block>
+        </category>
+        <category name="Texto" colour="#5ba58c">
+          <block type="text"></block>
+          <block type="text_join"></block>
+          <block type="text_length"></block>
+          <block type="text_print"></block>
+        </category>
+        <category name="Variables" colour="#a55b80">
+          <block type="variables_set"></block>
+          <block type="variables_get"></block>
+        </category>
+        <category name="Listas" colour="#a58c5b">
+          <block type="lists_create_with"></block>
+          <block type="lists_length"></block>
+          <block type="lists_getIndex"></block>
+        </category>
       </xml>`
     });
 
