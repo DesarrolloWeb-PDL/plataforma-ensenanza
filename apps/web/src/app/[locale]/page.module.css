@@ -1,7 +1,7 @@
 /* Brutalist landing */
 .page {
   min-height: 100vh;
-  background: var(--brutal-bg);
+  background: transparent;
   color: var(--brutal-ink);
   overflow-x: hidden;
   position: relative;

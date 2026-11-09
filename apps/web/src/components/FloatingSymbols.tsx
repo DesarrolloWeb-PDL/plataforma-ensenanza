@@ -53,7 +53,7 @@ export default function FloatingSymbols() {
   }, []);
 
   return (
-    <div aria-hidden="true" style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 1 }}>
+    <div aria-hidden="true" style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: -1 }}>
       {symbols.map((s) => (
         <span
           key={s.id}
@@ -64,7 +64,7 @@ export default function FloatingSymbols() {
             fontSize: `${s.size}rem`,
             fontWeight: 900,
             color: s.color,
-            opacity: 0.25,
+            opacity: 0.4,
             animation: `floatSymbol ${s.duration}s ease-in-out ${s.delay}s infinite`,
             transition: "color 1.5s ease",
           }}
@@ -74,8 +74,8 @@ export default function FloatingSymbols() {
       ))}
       <style jsx global>{`
         @keyframes floatSymbol {
-          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.15; }
-          50% { transform: translateY(-30px) rotate(20deg); opacity: 0.35; }
+          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.25; }
+          50% { transform: translateY(-30px) rotate(20deg); opacity: 0.5; }
         }
       `}</style>
     </div>
