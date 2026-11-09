@@ -19,7 +19,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#facc15" />
       </head>
       <body>
         <PostHogProvider>

@@ -27,6 +27,15 @@ export default async function Home() {
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
+          <div className={styles.logo}>
+            <span className={styles.logoSquares}>
+              <span className={styles.sq1} />
+              <span className={styles.sq2} />
+              <span className={styles.sq3} />
+              <span className={styles.sq4} />
+            </span>
+            <span className={styles.logoText}>PDL</span>
+          </div>
           <h1 className={styles.heroTitle}>{t("title")}</h1>
           <p className={styles.heroSubtitle}>{t("subtitle")}</p>
           <div className={styles.heroButtons}>

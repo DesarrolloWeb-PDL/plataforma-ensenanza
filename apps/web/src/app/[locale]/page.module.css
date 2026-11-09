@@ -210,6 +210,39 @@
 .finalCtaTitle { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; margin: 0 0 0.5rem; letter-spacing: -0.03em; }
 .finalCtaSubtitle { margin: 0 0 1.5rem; font-weight: 700; }
 
+/* ---------- Logo ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.logoSquares {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  width: 48px;
+  height: 48px;
+}
+.logoSquares span {
+  border: var(--brutal-border);
+  box-shadow: 2px 2px 0 #000;
+}
+.sq1 { background: var(--brutal-yellow); }
+.sq2 { background: var(--brutal-pink); }
+.sq3 { background: var(--brutal-cyan); }
+.sq4 { background: var(--brutal-green); }
+.logoText {
+  font-weight: 900;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: var(--brutal-border);
+  padding: 0.3rem 0.7rem;
+  background: #fff;
+  box-shadow: var(--brutal-shadow-sm);
+}
+
 /* ---------- Footer ---------- */
 .footer {
   text-align: left;
