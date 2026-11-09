@@ -42,6 +42,11 @@ export default async function LocaleLayout({
                 <a href="/sandbox">Sandbox</a>
                 <a href="/gamification">XP</a>
               </nav>
+              <div className="brutal-lang">
+                <a href="/">ES</a>
+                <a href="/en">EN</a>
+                <a href="/pt">PT</a>
+              </div>
             </header>
             <div className="brutal-main">{children}</div>
             <footer className="brutal-footer">
