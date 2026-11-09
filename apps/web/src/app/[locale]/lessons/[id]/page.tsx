@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import CodeRunner from "@/components/CodeRunner";
 import MdxContent from "@/components/MdxContent";
 import ProgressButton from "@/components/ProgressButton";
 import { loadContent } from "@/lib/content";
@@ -66,7 +67,13 @@ export default async function LessonPage({ params }: { params: { id: string; loc
             </a>
           </p>
         </section>
-      ) : null}
+      ) : (
+        <section style={{ marginTop: "2rem" }}>
+          <h2>Sandbox HTML/CSS/JS</h2>
+          <p>Practicá la consigna en el editor. Modificá el HTML, CSS y JS y presioná Reset para ver el resultado.</p>
+          <CodeRunner title="Editor HTML/CSS/JS" height={360} />
+        </section>
+      )}
     </main>
   );
 }
