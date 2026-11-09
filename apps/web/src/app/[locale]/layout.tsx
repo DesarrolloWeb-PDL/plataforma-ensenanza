@@ -27,15 +27,22 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             <ServiceWorkerRegister />
             <header className="brutal-header">
-              <a href="/" className="brutal-logo">
-                <span className="brutal-squares">
-                  <span style={{ background: "var(--brutal-yellow)" }} />
-                  <span style={{ background: "var(--brutal-pink)" }} />
-                  <span style={{ background: "var(--brutal-cyan)" }} />
-                  <span style={{ background: "var(--brutal-green)" }} />
-                </span>
-                <span>PDL</span>
-              </a>
+              <div className="brutal-logo-wrap">
+                <a href="/" className="brutal-logo">
+                  <span className="brutal-squares">
+                    <span style={{ background: "var(--brutal-yellow)" }} />
+                    <span style={{ background: "var(--brutal-pink)" }} />
+                    <span style={{ background: "var(--brutal-cyan)" }} />
+                    <span style={{ background: "var(--brutal-green)" }} />
+                  </span>
+                  <span>PDL</span>
+                </a>
+                <div className="brutal-lang">
+                  <a href="/">ES</a>
+                  <a href="/en">EN</a>
+                  <a href="/pt">PT</a>
+                </div>
+              </div>
               <HeaderNav />
             </header>
             <div className="brutal-main">{children}</div>

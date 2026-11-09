@@ -10,12 +10,6 @@ const links = [
   { href: "/gamification", label: "XP" },
 ];
 
-const langs = [
-  { href: "/", label: "ES" },
-  { href: "/en", label: "EN" },
-  { href: "/pt", label: "PT" },
-];
-
 export default function HeaderNav() {
   const [open, setOpen] = useState(false);
 
@@ -26,11 +20,6 @@ export default function HeaderNav() {
           <a key={l.href} href={l.href}>{l.label}</a>
         ))}
       </nav>
-      <div className="brutal-lang brutal-lang-desktop">
-        {langs.map((l) => (
-          <a key={l.href} href={l.href}>{l.label}</a>
-        ))}
-      </div>
 
       <button
         type="button"
@@ -39,9 +28,7 @@ export default function HeaderNav() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
-        <span />
-        <span />
-        <span />
+        🍔
       </button>
 
       {open ? (
@@ -51,11 +38,6 @@ export default function HeaderNav() {
               <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
             ))}
           </nav>
-          <div className="brutal-lang-mobile">
-            {langs.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
-            ))}
-          </div>
         </div>
       ) : null}
     </>
