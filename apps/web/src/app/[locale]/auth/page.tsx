@@ -29,12 +29,18 @@ export default function AuthPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      const json = (await res.json()) as { data?: { accessToken: string; refreshToken: string }; error?: { message?: string } };
-      if (!res.ok || !json.data) {
+      const json = (await res.json()) as {
+        data?: { accessToken?: string; refreshToken?: string; tokens?: { accessToken?: string; refreshToken?: string } };
+        error?: { message?: string };
+      };
+      const data = json.data;
+      const accessToken = data?.accessToken ?? data?.tokens?.accessToken;
+      const refreshToken = data?.refreshToken ?? data?.tokens?.refreshToken;
+      if (!res.ok || !data || !accessToken || !refreshToken) {
         throw new Error(json.error?.message ?? "No se pudo autenticar");
       }
-      window.localStorage.setItem("accessToken", json.data.accessToken);
-      window.localStorage.setItem("refreshToken", json.data.refreshToken);
+      window.localStorage.setItem("accessToken", accessToken);
+      window.localStorage.setItem("refreshToken", refreshToken);
       window.location.href = "/tracks";
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
