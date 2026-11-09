@@ -54,6 +54,21 @@
     "title": "Recursos de estudo",
     "subtitle": "Material gratuito para aprender e praticar programação."
   },
+  "auth": {
+    "title": "Acesso",
+    "login": "Entrar",
+    "register": "Criar conta",
+    "name": "Nome",
+    "email": "E-mail",
+    "password": "Senha",
+    "submitLogin": "Entrar",
+    "submitRegister": "Cadastrar",
+    "loading": "Carregando...",
+    "noAccount": "Não tem conta?",
+    "hasAccount": "Já tem conta?",
+    "signup": "Cadastre-se",
+    "signin": "Entre"
+  },
   "stats": {
     "title": "Estatísticas públicas",
     "subtitle": "Dados gerais da plataforma.",

@@ -8,6 +8,7 @@ const links = [
   { href: "/stats", label: "Stats" },
   { href: "/sandbox", label: "Sandbox" },
   { href: "/gamification", label: "XP" },
+  { href: "/auth", label: "Entrar" },
 ];
 
 export default function HeaderNav() {

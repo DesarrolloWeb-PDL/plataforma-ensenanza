@@ -40,7 +40,7 @@ export default async function Home({ params: { locale } }: { params: { locale: s
           <h1 className={styles.heroTitle}>{t("title")}</h1>
           <p className={styles.heroSubtitle}>{t("subtitle")}</p>
           <div className={styles.heroButtons}>
-            <Link href="/tracks" className={styles.btnPrimary}>{t("ctaStart")}</Link>
+            <Link href="/auth" className={styles.btnPrimary}>{t("ctaStart")}</Link>
             <Link href="/tracks" className={styles.btnSecondary}>{t("ctaTracks")}</Link>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default async function Home({ params: { locale } }: { params: { locale: s
       <section className={styles.finalCta}>
         <h2 className={styles.finalCtaTitle}>{t("finalCtaTitle")}</h2>
         <p className={styles.finalCtaSubtitle}>{t("finalCtaSubtitle")}</p>
-        <Link href="/tracks" className={styles.btnPrimary}>{t("finalCta")}</Link>
+        <Link href="/auth" className={styles.btnPrimary}>{t("finalCta")}</Link>
       </section>
 
     </div>

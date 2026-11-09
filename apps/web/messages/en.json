@@ -54,6 +54,21 @@
     "title": "Study resources",
     "subtitle": "Free material to learn and practice programming."
   },
+  "auth": {
+    "title": "Access",
+    "login": "Sign in",
+    "register": "Create account",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "submitLogin": "Sign in",
+    "submitRegister": "Sign up",
+    "loading": "Loading...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signup": "Sign up",
+    "signin": "Sign in"
+  },
   "stats": {
     "title": "Public statistics",
     "subtitle": "General platform data.",
