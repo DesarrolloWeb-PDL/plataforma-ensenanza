@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
@@ -22,7 +22,8 @@ async function fetchTracks(): Promise<Track[]> {
   }
 }
 
-export default async function TracksPage() {
+export default async function TracksPage({ params: { locale } }: { params: { locale: string } }) {
+  setRequestLocale(locale);
   const t = await getTranslations("tracks");
   const tracks = await fetchTracks();
 
@@ -33,7 +34,7 @@ export default async function TracksPage() {
         {tracks.map((track) => (
           <li key={track.id}>
             <Link href={`/tracks/${track.slug}`}>{track.name}</Link>
-            <span> ({track.ageBand})</span>
+            <span> — {track.slug === "bloques" ? t("ageKids") : t("ageTeens")}</span>
           </li>
         ))}
       </ul>

@@ -36,7 +36,7 @@ export default async function LocaleLayout({
                     <span style={{ background: "var(--brutal-cyan)" }} />
                     <span style={{ background: "var(--brutal-green)" }} />
                   </span>
-                  <span>PDL</span>
+                  <span>DEV-PDL</span>
                 </a>
                 <div className="brutal-lang">
                   <a href="/">ES</a>

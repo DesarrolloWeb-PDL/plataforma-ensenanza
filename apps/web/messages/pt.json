@@ -7,10 +7,10 @@
     "tracksTitle": "Escolha seu caminho",
     "tracksSubtitle": "Duas trilhas pensadas para sua idade e ritmo.",
     "bloquesTitle": "Blocos",
-    "bloquesAge": "6 a 12 anos",
+    "bloquesAge": "Recomendado para os mais jovens",
     "bloquesDesc": "Aprenda lógica e criatividade com blocos visuais, sem escrever código.",
     "htmlTitle": "HTML5 + IA",
-    "htmlAge": "12 a 17 anos",
+    "htmlAge": "Recomendado para adolescentes",
     "htmlDesc": "Crie páginas web reais e experimente com inteligência artificial.",
     "featuresTitle": "Tudo que você precisa para aprender",
     "featureLessons": "Aulas interativas",
@@ -42,7 +42,9 @@
   "tracks": {
     "title": "Trilhas",
     "levels": "Níveis",
-    "notFound": "Trilha não encontrada"
+    "notFound": "Trilha não encontrada",
+    "ageKids": "Recomendado para os mais jovens",
+    "ageTeens": "Recomendado para adolescentes"
   },
   "lessons": {
     "title": "Aulas",

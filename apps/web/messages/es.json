@@ -7,10 +7,10 @@
     "tracksTitle": "Elegí tu camino",
     "tracksSubtitle": "Dos tracks pensados para tu edad y tu ritmo.",
     "bloquesTitle": "Bloques",
-    "bloquesAge": "6 a 12 años",
+    "bloquesAge": "Recomendado para los más pequeños",
     "bloquesDesc": "Aprendé lógica y creatividad con bloques visuales, sin escribir código.",
     "htmlTitle": "HTML5 + AI",
-    "htmlAge": "12 a 17 años",
+    "htmlAge": "Recomendado para adolescentes",
     "htmlDesc": "Creá páginas web reales y experimentá con inteligencia artificial.",
     "featuresTitle": "Todo lo que necesitás para aprender",
     "featureLessons": "Lecciones interactivas",
@@ -42,7 +42,9 @@
   "tracks": {
     "title": "Tracks",
     "levels": "Niveles",
-    "notFound": "Track no encontrado"
+    "notFound": "Track no encontrado",
+    "ageKids": "Recomendado para los más pequeños",
+    "ageTeens": "Recomendado para adolescentes"
   },
   "lessons": {
     "title": "Lecciones",
