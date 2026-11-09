@@ -1,10 +1,11 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./page.module.css";
 
-export default async function Home() {
+export default async function Home({ params: { locale } }: { params: { locale: string } }) {
+  setRequestLocale(locale);
   const t = await getTranslations("home");
 
   const features = [
