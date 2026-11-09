@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import MdxContent from "@/components/MdxContent";
 import ProgressButton from "@/components/ProgressButton";
@@ -26,7 +26,8 @@ async function fetchLesson(id: string): Promise<Lesson | null> {
   }
 }
 
-export default async function LessonPage({ params }: { params: { id: string } }) {
+export default async function LessonPage({ params }: { params: { id: string; locale: string } }) {
+  setRequestLocale(params.locale);
   const t = await getTranslations("lessons");
   const lesson = await fetchLesson(params.id);
   if (!lesson) {
@@ -35,12 +36,37 @@ export default async function LessonPage({ params }: { params: { id: string } })
 
   const { frontmatter, content } = loadContent(lesson.mdxRef);
 
+  const isBlocks = lesson.trackId.includes("bloques") || lesson.mdxRef.includes("bloques");
+
   return (
     <main>
       <h1>{frontmatter.title ?? lesson.title}</h1>
       {frontmatter.description ? <p>{frontmatter.description}</p> : null}
       <ProgressButton kind="lesson" id={lesson.id} />
       <MdxContent source={content} />
+
+      {isBlocks ? (
+        <section style={{ marginTop: "2rem" }}>
+          <h2>Sandbox de bloques</h2>
+          <p>Practicá la consigna en el editor de Scratch. Si no carga, abrilo en una pestaña nueva.</p>
+          <div style={{ border: "3px solid #000", boxShadow: "6px 6px 0 #000", overflow: "hidden" }}>
+            <iframe
+              src="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"
+              title="Scratch editor"
+              width="100%"
+              height="480"
+              style={{ border: 0, display: "block" }}
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              allow="fullscreen"
+            />
+          </div>
+          <p style={{ marginTop: "0.8rem" }}>
+            <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener noreferrer" style={{ background: "var(--brutal-yellow)", padding: "0.4rem 0.8rem", border: "3px solid #000", boxShadow: "4px 4px 0 #000", fontWeight: 900, textTransform: "uppercase", textDecoration: "none", display: "inline-block" }}>
+              Abrir en Scratch →
+            </a>
+          </p>
+        </section>
+      ) : null}
     </main>
   );
 }
