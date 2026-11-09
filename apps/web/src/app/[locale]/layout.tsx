@@ -37,6 +37,7 @@ export default async function LocaleLayout({
               </a>
               <nav className="brutal-nav">
                 <a href="/tracks">Tracks</a>
+                <a href="/resources">Recursos</a>
                 <a href="/sandbox">Sandbox</a>
                 <a href="/gamification">XP</a>
               </nav>

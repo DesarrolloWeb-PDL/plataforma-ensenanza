@@ -47,5 +47,9 @@
   "lessons": {
     "title": "Lecciones",
     "notFound": "Lección no encontrada"
+  },
+  "resources": {
+    "title": "Recursos de estudio",
+    "subtitle": "Material gratuito para aprender y practicar programación."
   }
 }
