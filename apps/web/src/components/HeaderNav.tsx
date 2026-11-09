@@ -28,9 +28,12 @@ export default function HeaderNav() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
-        <span />
-        <span />
-        <span />
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+          <rect x="2" y="4" width="28" height="6" fill="var(--brutal-yellow)" stroke="#000" strokeWidth="2" />
+          <rect x="2" y="11" width="28" height="3" fill="var(--brutal-green)" stroke="#000" strokeWidth="2" />
+          <rect x="2" y="15" width="28" height="6" fill="#3f2a1a" stroke="#000" strokeWidth="2" />
+          <rect x="2" y="22" width="28" height="6" fill="var(--brutal-yellow)" stroke="#000" strokeWidth="2" />
+        </svg>
       </button>
 
       {open ? (
