@@ -25,7 +25,26 @@ export default async function LocaleLayout({
         <PostHogProvider>
           <NextIntlClientProvider messages={messages}>
             <ServiceWorkerRegister />
-            {children}
+            <header className="brutal-header">
+              <a href="/" className="brutal-logo">
+                <span className="brutal-squares">
+                  <span style={{ background: "var(--brutal-yellow)" }} />
+                  <span style={{ background: "var(--brutal-pink)" }} />
+                  <span style={{ background: "var(--brutal-cyan)" }} />
+                  <span style={{ background: "var(--brutal-green)" }} />
+                </span>
+                <span>PDL</span>
+              </a>
+              <nav className="brutal-nav">
+                <a href="/tracks">Tracks</a>
+                <a href="/sandbox">Sandbox</a>
+                <a href="/gamification">XP</a>
+              </nav>
+            </header>
+            <div className="brutal-main">{children}</div>
+            <footer className="brutal-footer">
+              © {new Date().getFullYear()} Plataforma de Enseñanza — DesarrolloWeb-PDL
+            </footer>
           </NextIntlClientProvider>
         </PostHogProvider>
       </body>

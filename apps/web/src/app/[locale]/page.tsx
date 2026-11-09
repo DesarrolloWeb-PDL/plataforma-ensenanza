@@ -23,7 +23,7 @@ export default async function Home() {
   ];
 
   return (
-    <main className={styles.page}>
+    <div className={styles.page}>
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
@@ -110,9 +110,6 @@ export default async function Home() {
         <Link href="/tracks" className={styles.btnPrimary}>{t("finalCta")}</Link>
       </section>
 
-      <footer className={styles.footer}>
-        © {new Date().getFullYear()} Plataforma de Enseñanza
-      </footer>
-    </main>
+    </div>
   );
 }
