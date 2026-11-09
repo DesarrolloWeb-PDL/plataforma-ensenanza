@@ -28,7 +28,9 @@ export default function HeaderNav() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
-        🍔
+        <span />
+        <span />
+        <span />
       </button>
 
       {open ? (
