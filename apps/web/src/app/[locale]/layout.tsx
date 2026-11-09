@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import "../globals.css";
 
+import HeaderNav from "@/components/HeaderNav";
 import PostHogProvider from "@/components/PostHogProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
@@ -35,18 +36,7 @@ export default async function LocaleLayout({
                 </span>
                 <span>PDL</span>
               </a>
-              <nav className="brutal-nav">
-                <a href="/tracks">Tracks</a>
-                <a href="/resources">Recursos</a>
-                <a href="/stats">Stats</a>
-                <a href="/sandbox">Sandbox</a>
-                <a href="/gamification">XP</a>
-              </nav>
-              <div className="brutal-lang">
-                <a href="/">ES</a>
-                <a href="/en">EN</a>
-                <a href="/pt">PT</a>
-              </div>
+              <HeaderNav />
             </header>
             <div className="brutal-main">{children}</div>
             <footer className="brutal-footer">
