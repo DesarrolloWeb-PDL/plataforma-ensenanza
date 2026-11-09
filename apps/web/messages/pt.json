@@ -1,0 +1,68 @@
+{
+  "home": {
+    "title": "Plataforma de Ensino",
+    "subtitle": "Aprenda a programar brincando, dos 6 aos 17 anos.",
+    "ctaStart": "Começar grátis",
+    "ctaTracks": "Ver trilhas",
+    "tracksTitle": "Escolha seu caminho",
+    "tracksSubtitle": "Duas trilhas pensadas para sua idade e ritmo.",
+    "bloquesTitle": "Blocos",
+    "bloquesAge": "6 a 12 anos",
+    "bloquesDesc": "Aprenda lógica e criatividade com blocos visuais, sem escrever código.",
+    "htmlTitle": "HTML5 + IA",
+    "htmlAge": "12 a 17 anos",
+    "htmlDesc": "Crie páginas web reais e experimente com inteligência artificial.",
+    "featuresTitle": "Tudo que você precisa para aprender",
+    "featureLessons": "Aulas interativas",
+    "featureLessonsDesc": "Conteúdo MDX com exemplos e prática guiada.",
+    "featureProgress": "Acompanhamento de progresso",
+    "featureProgressDesc": "Marque aulas e níveis como concluídos.",
+    "featureAssignments": "Tarefas e projetos",
+    "featureAssignmentsDesc": "Envie código, arquivos ou quizzes e receba feedback.",
+    "featureLive": "Aulas ao vivo",
+    "featureLiveDesc": "Participe de aulas com link externo e presença.",
+    "featureWorksheets": "Fichas imprimíveis",
+    "featureWorksheetsDesc": "Baixe e resolva fichas com gabarito.",
+    "featureGamification": "Gamificação",
+    "featureGamificationDesc": "Ganhe XP, sequências e badges pelo seu esforço.",
+    "howTitle": "Como funciona?",
+    "step1": "Escolha uma trilha",
+    "step1Desc": "Blocos ou HTML5+IA conforme sua idade.",
+    "step2": "Aprenda fazendo",
+    "step2Desc": "Aulas, sandbox e tarefas reais.",
+    "step3": "Acompanhe seu progresso",
+    "step3Desc": "Painéis para alunos, professores e famílias.",
+    "finalCtaTitle": "Pronto para começar?",
+    "finalCtaSubtitle": "Crie sua conta grátis e comece hoje.",
+    "finalCta": "Criar conta"
+  },
+  "metadata": {
+    "title": "Plataforma de Ensino"
+  },
+  "tracks": {
+    "title": "Trilhas",
+    "levels": "Níveis",
+    "notFound": "Trilha não encontrada"
+  },
+  "lessons": {
+    "title": "Aulas",
+    "notFound": "Aula não encontrada"
+  },
+  "resources": {
+    "title": "Recursos de estudo",
+    "subtitle": "Material gratuito para aprender e praticar programação."
+  },
+  "stats": {
+    "title": "Estatísticas públicas",
+    "subtitle": "Dados gerais da plataforma.",
+    "users": "Usuários",
+    "tracks": "Trilhas",
+    "levels": "Níveis",
+    "lessons": "Aulas",
+    "assignments": "Tarefas",
+    "submissions": "Entregas",
+    "worksheets": "Fichas",
+    "badges": "Badges",
+    "error": "Não foi possível carregar as estatísticas."
+  }
+}

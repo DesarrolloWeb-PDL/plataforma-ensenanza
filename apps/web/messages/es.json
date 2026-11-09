@@ -51,5 +51,18 @@
   "resources": {
     "title": "Recursos de estudio",
     "subtitle": "Material gratuito para aprender y practicar programación."
+  },
+  "stats": {
+    "title": "Estadísticas públicas",
+    "subtitle": "Datos generales de la plataforma.",
+    "users": "Usuarios",
+    "tracks": "Tracks",
+    "levels": "Niveles",
+    "lessons": "Lecciones",
+    "assignments": "Tareas",
+    "submissions": "Entregas",
+    "worksheets": "Fichas",
+    "badges": "Badges",
+    "error": "No se pudieron cargar las estadísticas."
   }
 }

@@ -13,6 +13,7 @@ import { registerLiveClassesRoutes } from "./live-classes/routes";
 import { registerWorksheetsRoutes } from "./worksheets/routes";
 import { registerDashboardRoutes } from "./dashboards/routes";
 import { registerGamificationRoutes } from "./gamification/routes";
+import { registerPublicRoutes } from "./public/routes";
 
 export interface AppContext {
   env: Env;
@@ -56,6 +57,7 @@ await registerLiveClassesRoutes(app, context);
 await registerWorksheetsRoutes(app, context);
 await registerDashboardRoutes(app, context);
 await registerGamificationRoutes(app, context);
+  await registerPublicRoutes(app, context);
 
   return { app, context };
 }

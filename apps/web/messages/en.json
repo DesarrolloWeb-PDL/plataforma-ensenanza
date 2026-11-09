@@ -1,0 +1,68 @@
+{
+  "home": {
+    "title": "Teaching Platform",
+    "subtitle": "Learn to code by playing, from age 6 to 17.",
+    "ctaStart": "Start for free",
+    "ctaTracks": "View tracks",
+    "tracksTitle": "Choose your path",
+    "tracksSubtitle": "Two tracks designed for your age and pace.",
+    "bloquesTitle": "Blocks",
+    "bloquesAge": "Ages 6 to 12",
+    "bloquesDesc": "Learn logic and creativity with visual blocks, no code writing.",
+    "htmlTitle": "HTML5 + AI",
+    "htmlAge": "Ages 12 to 17",
+    "htmlDesc": "Build real web pages and experiment with artificial intelligence.",
+    "featuresTitle": "Everything you need to learn",
+    "featureLessons": "Interactive lessons",
+    "featureLessonsDesc": "MDX content with examples and guided practice.",
+    "featureProgress": "Progress tracking",
+    "featureProgressDesc": "Mark lessons and levels as completed.",
+    "featureAssignments": "Tasks and projects",
+    "featureAssignmentsDesc": "Submit code, files or quizzes and get feedback.",
+    "featureLive": "Live classes",
+    "featureLiveDesc": "Join classes via external links and attendance.",
+    "featureWorksheets": "Printable worksheets",
+    "featureWorksheetsDesc": "Download and solve worksheets with answer keys.",
+    "featureGamification": "Gamification",
+    "featureGamificationDesc": "Earn XP, streaks and badges for your effort.",
+    "howTitle": "How does it work?",
+    "step1": "Choose a track",
+    "step1Desc": "Blocks or HTML5+AI based on your age.",
+    "step2": "Learn by doing",
+    "step2Desc": "Lessons, sandbox and real tasks.",
+    "step3": "Track your progress",
+    "step3Desc": "Dashboards for students, teachers and families.",
+    "finalCtaTitle": "Ready to start?",
+    "finalCtaSubtitle": "Create your free account and start today.",
+    "finalCta": "Create account"
+  },
+  "metadata": {
+    "title": "Teaching Platform"
+  },
+  "tracks": {
+    "title": "Tracks",
+    "levels": "Levels",
+    "notFound": "Track not found"
+  },
+  "lessons": {
+    "title": "Lessons",
+    "notFound": "Lesson not found"
+  },
+  "resources": {
+    "title": "Study resources",
+    "subtitle": "Free material to learn and practice programming."
+  },
+  "stats": {
+    "title": "Public statistics",
+    "subtitle": "General platform data.",
+    "users": "Users",
+    "tracks": "Tracks",
+    "levels": "Levels",
+    "lessons": "Lessons",
+    "assignments": "Assignments",
+    "submissions": "Submissions",
+    "worksheets": "Worksheets",
+    "badges": "Badges",
+    "error": "Could not load statistics."
+  }
+}
