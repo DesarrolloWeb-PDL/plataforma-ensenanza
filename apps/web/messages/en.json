@@ -7,10 +7,10 @@
     "tracksTitle": "Choose your path",
     "tracksSubtitle": "Two tracks designed for your age and pace.",
     "bloquesTitle": "Blocks",
-    "bloquesAge": "Recommended for younger learners",
+    "bloquesAge": "For younger kids",
     "bloquesDesc": "Learn logic and creativity with visual blocks, no code writing.",
     "htmlTitle": "HTML5 + AI",
-    "htmlAge": "Recommended for teens",
+    "htmlAge": "For youth and adults",
     "htmlDesc": "Build real web pages and experiment with artificial intelligence.",
     "featuresTitle": "Everything you need to learn",
     "featureLessons": "Interactive lessons",
@@ -43,8 +43,8 @@
     "title": "Tracks",
     "levels": "Levels",
     "notFound": "Track not found",
-    "ageKids": "Recommended for younger learners",
-    "ageTeens": "Recommended for teens"
+    "ageKids": "For younger kids",
+    "ageTeens": "For youth and adults"
   },
   "lessons": {
     "title": "Lessons",

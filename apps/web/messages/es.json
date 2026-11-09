@@ -1,16 +1,16 @@
 {
   "home": {
     "title": "Plataforma de Enseñanza",
-    "subtitle": "Aprende a programar jugando, desde los 6 hasta los 17 años.",
+    "subtitle": "Aprende a programar jugando, para todos los niveles.",
     "ctaStart": "Empezar gratis",
     "ctaTracks": "Ver tracks",
     "tracksTitle": "Elegí tu camino",
-    "tracksSubtitle": "Dos tracks pensados para tu edad y tu ritmo.",
+    "tracksSubtitle": "Dos tracks pensados para cada etapa.",
     "bloquesTitle": "Bloques",
-    "bloquesAge": "Recomendado para los más pequeños",
+    "bloquesAge": "Para los más chicos",
     "bloquesDesc": "Aprendé lógica y creatividad con bloques visuales, sin escribir código.",
     "htmlTitle": "HTML5 + AI",
-    "htmlAge": "Recomendado para adolescentes",
+    "htmlAge": "Para jóvenes y adultos",
     "htmlDesc": "Creá páginas web reales y experimentá con inteligencia artificial.",
     "featuresTitle": "Todo lo que necesitás para aprender",
     "featureLessons": "Lecciones interactivas",
@@ -27,7 +27,7 @@
     "featureGamificationDesc": "Ganá XP, rachas y badges por tu esfuerzo.",
     "howTitle": "¿Cómo funciona?",
     "step1": "Elegí un track",
-    "step1Desc": "Bloques o HTML5+AI según tu edad.",
+    "step1Desc": "Bloques o HTML5+AI según tu etapa.",
     "step2": "Aprendé haciendo",
     "step2Desc": "Lecciones, sandbox y tareas reales.",
     "step3": "Medí tu progreso",
@@ -43,8 +43,8 @@
     "title": "Tracks",
     "levels": "Niveles",
     "notFound": "Track no encontrado",
-    "ageKids": "Recomendado para los más pequeños",
-    "ageTeens": "Recomendado para adolescentes"
+    "ageKids": "Para los más chicos",
+    "ageTeens": "Para jóvenes y adultos"
   },
   "lessons": {
     "title": "Lecciones",
@@ -53,6 +53,19 @@
   "resources": {
     "title": "Recursos de estudio",
     "subtitle": "Material gratuito para aprender y practicar programación."
+  },
+  "stats": {
+    "title": "Estadísticas públicas",
+    "subtitle": "Datos generales de la plataforma.",
+    "users": "Usuarios",
+    "tracks": "Tracks",
+    "levels": "Niveles",
+    "lessons": "Lecciones",
+    "assignments": "Tareas",
+    "submissions": "Entregas",
+    "worksheets": "Fichas",
+    "badges": "Badges",
+    "error": "No se pudieron cargar las estadísticas."
   },
   "auth": {
     "title": "Acceso",
@@ -68,18 +81,5 @@
     "hasAccount": "¿Ya tenés cuenta?",
     "signup": "Registrate",
     "signin": "Iniciá sesión"
-  },
-  "stats": {
-    "title": "Estadísticas públicas",
-    "subtitle": "Datos generales de la plataforma.",
-    "users": "Usuarios",
-    "tracks": "Tracks",
-    "levels": "Niveles",
-    "lessons": "Lecciones",
-    "assignments": "Tareas",
-    "submissions": "Entregas",
-    "worksheets": "Fichas",
-    "badges": "Badges",
-    "error": "No se pudieron cargar las estadísticas."
   }
 }
