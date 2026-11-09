@@ -4,6 +4,7 @@
   background: var(--brutal-bg);
   color: var(--brutal-ink);
   overflow-x: hidden;
+  position: relative;
 }
 
 /* ---------- Hero ---------- */
