@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
   { href: "/tracks", label: "Tracks" },
@@ -13,11 +13,29 @@ const links = [
 
 export default function HeaderNav() {
   const [open, setOpen] = useState(false);
+  const [authed, setAuthed] = useState(false);
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("accessToken");
+    const r = window.localStorage.getItem("userRole");
+    setAuthed(!!token);
+    setRole(r);
+  }, []);
+
+  const roleLinks =
+    role === "admin"
+      ? [{ href: "/admin", label: "Admin" }, { href: "/teacher", label: "Docente" }]
+      : role === "teacher"
+        ? [{ href: "/teacher", label: "Docente" }]
+        : [];
+
+  const visibleLinks = authed ? [...links, ...roleLinks] : links.filter((l) => l.href === "/auth");
 
   return (
     <>
       <nav className="brutal-nav brutal-nav-desktop">
-        {links.map((l) => (
+        {visibleLinks.map((l) => (
           <a key={l.href} href={l.href}>{l.label}</a>
         ))}
       </nav>
@@ -40,7 +58,7 @@ export default function HeaderNav() {
       {open ? (
         <div className="brutal-mobile-menu">
           <nav className="brutal-nav-mobile">
-            {links.map((l) => (
+            {visibleLinks.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
             ))}
           </nav>

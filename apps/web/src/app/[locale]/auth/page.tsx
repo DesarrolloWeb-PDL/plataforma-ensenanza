@@ -31,7 +31,12 @@ export default function AuthPage() {
         body: JSON.stringify(body),
       });
       const json = (await res.json()) as {
-        data?: { accessToken?: string; refreshToken?: string; tokens?: { accessToken?: string; refreshToken?: string } };
+        data?: {
+          accessToken?: string;
+          refreshToken?: string;
+          tokens?: { accessToken?: string; refreshToken?: string };
+          user?: { role?: string };
+        };
         error?: { message?: string };
       };
       const data = json.data;
@@ -42,6 +47,9 @@ export default function AuthPage() {
       }
       window.localStorage.setItem("accessToken", accessToken);
       window.localStorage.setItem("refreshToken", refreshToken);
+      if (data?.user?.role) {
+        window.localStorage.setItem("userRole", data.user.role);
+      }
       let target = "/tracks";
       if (mode === "register" && birthDate) {
         const birth = new Date(birthDate);
