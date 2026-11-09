@@ -32,11 +32,15 @@ body {
 }
 
 h1, h2, h3, h4 {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.2;
+}
+
+section {
+  margin-bottom: 2.5rem;
 }
 
 p { margin: 0 0 1rem; font-weight: 600; }
@@ -55,13 +59,13 @@ ul, ol {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.8rem;
+  gap: 1.2rem;
 }
 
 li {
   border: var(--brutal-border);
   background: #fff;
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.4rem;
   box-shadow: var(--brutal-shadow-sm);
 }
 
