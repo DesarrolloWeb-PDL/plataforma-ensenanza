@@ -32,12 +32,22 @@ export default function HeaderNav() {
 
   const visibleLinks = authed ? [...links, ...roleLinks] : links.filter((l) => l.href === "/auth");
 
+  function logout() {
+    window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("refreshToken");
+    window.localStorage.removeItem("userRole");
+    window.location.href = "/";
+  }
+
   return (
     <>
       <nav className="brutal-nav brutal-nav-desktop">
         {visibleLinks.map((l) => (
           <a key={l.href} href={l.href}>{l.label}</a>
         ))}
+        {authed ? (
+          <a href="#" onClick={(e) => { e.preventDefault(); logout(); }}>Salir</a>
+        ) : null}
       </nav>
 
       <button
@@ -61,6 +71,9 @@ export default function HeaderNav() {
             {visibleLinks.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
             ))}
+            {authed ? (
+              <a href="#" onClick={(e) => { e.preventDefault(); logout(); }}>Salir</a>
+            ) : null}
           </nav>
         </div>
       ) : null}
