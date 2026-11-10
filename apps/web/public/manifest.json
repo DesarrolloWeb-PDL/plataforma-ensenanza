@@ -1,6 +1,6 @@
 {
-  "name": "Plataforma de Ensenanza",
-  "short_name": "Ensenanza",
+  "name": "DesarrolloWeb Academy",
+  "short_name": "DW Academy",
   "description": "Plataforma educativa de programacion para estudiantes.",
   "start_url": "/",
   "scope": "/",

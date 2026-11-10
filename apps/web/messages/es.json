@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Plataforma de Enseñanza",
+    "title": "DesarrolloWeb Academy",
     "subtitle": "Aprende a programar jugando, para todos los niveles.",
     "ctaStart": "Empezar gratis",
     "ctaTracks": "Ver tracks",
@@ -37,7 +37,7 @@
     "finalCta": "Crear cuenta"
   },
   "metadata": {
-    "title": "Plataforma de Enseñanza"
+    "title": "DesarrolloWeb Academy"
   },
   "tracks": {
     "title": "Tracks",

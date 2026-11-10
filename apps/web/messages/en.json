@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Teaching Platform",
+    "title": "DesarrolloWeb Academy",
     "subtitle": "Learn to code by playing, from age 6 to 17.",
     "ctaStart": "Start for free",
     "ctaTracks": "View tracks",
@@ -37,7 +37,7 @@
     "finalCta": "Create account"
   },
   "metadata": {
-    "title": "Teaching Platform"
+    "title": "DesarrolloWeb Academy"
   },
   "tracks": {
     "title": "Tracks",

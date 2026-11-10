@@ -13,7 +13,7 @@ export default function FooterEmblem() {
         <span>DEV-PDL</span>
       </a>
       <span style={{ fontWeight: 700, fontSize: "0.95rem" }}>
-        © {new Date().getFullYear()} — DesarrolloWeb-PDL
+        © {new Date().getFullYear()} DesarrolloWeb Academy — Paso de los Libres
       </span>
     </div>
   );
