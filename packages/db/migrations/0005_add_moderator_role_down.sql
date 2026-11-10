@@ -1,0 +1,2 @@
+-- Rollback: Postgres no permite eliminar valores de un enum directamente.
+-- Se deja como no-op; para revertir habría que recrear el tipo.

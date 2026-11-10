@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ROLES = ["student", "teacher", "parent", "admin"] as const;
+export const ROLES = ["student", "teacher", "parent", "moderator", "admin"] as const;
 export type Role = (typeof ROLES)[number];
 
 export interface User {
