@@ -29,6 +29,7 @@ export default async function Home({ params: { locale } }: { params: { locale: s
       <FloatingSymbols />
       {/* Hero */}
       <section className={styles.hero}>
+        <FloatingSymbols absolute />
         <div className={styles.heroContent}>
           <div className={styles.logo}>
             <span className={styles.logoSquares}>

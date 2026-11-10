@@ -34,7 +34,7 @@ function createSymbol(id: number): Symbol {
   };
 }
 
-export default function FloatingSymbols() {
+export default function FloatingSymbols({ absolute = false }: { absolute?: boolean }) {
   const [symbols, setSymbols] = useState<Symbol[]>([]);
 
   useEffect(() => {
@@ -53,7 +53,16 @@ export default function FloatingSymbols() {
   }, []);
 
   return (
-    <div aria-hidden="true" style={{ position: "fixed", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
+    <div
+      aria-hidden="true"
+      style={{
+        position: absolute ? "absolute" : "fixed",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
+    >
       {symbols.map((s) => (
         <span
           key={s.id}
