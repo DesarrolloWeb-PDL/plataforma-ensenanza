@@ -396,3 +396,144 @@ img {
     padding: 1.25rem 0.75rem;
   }
 }
+
+/* ---------- Footer grid (DesarrolloWeb style) ---------- */
+.brutal-footer {
+  text-align: left;
+  font-weight: 700;
+  padding: 2rem 1.5rem 1.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.footer-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1rem;
+  border: var(--brutal-border);
+  background: #fff;
+  padding: 0.4rem 0.7rem;
+  box-shadow: var(--brutal-shadow-sm);
+  align-self: flex-start;
+  overflow-wrap: anywhere;
+}
+
+.footer-about {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.footer-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--brutal-yellow);
+  border: var(--brutal-border);
+  padding: 0.25rem 0.6rem;
+  align-self: flex-start;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-links li {
+  border: none;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.footer-links a {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: none;
+  padding: 0.15rem 0;
+}
+.footer-links a:hover {
+  background: var(--brutal-yellow);
+  padding: 0.15rem 0.4rem;
+  border: 2px solid #000;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  border-top: var(--brutal-border);
+  padding-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.footer-copy {
+  font-weight: 700;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+}
+.footer-brand a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 0.25rem 0.6rem;
+  box-shadow: 2px 2px 0 #000;
+  transition: transform 0.1s ease;
+}
+.footer-brand a:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+@media (max-width: 720px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-brand-title {
+    align-self: stretch;
+    justify-content: center;
+  }
+  .footer-subtitle {
+    align-self: center;
+  }
+  .footer-links {
+    align-items: center;
+  }
+}

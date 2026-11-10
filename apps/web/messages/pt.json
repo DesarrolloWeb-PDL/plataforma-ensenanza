@@ -50,6 +50,20 @@
     "title": "Aulas",
     "notFound": "Aula não encontrada"
   },
+  "footer": {
+    "about": "Plataforma de programação para crianças e jovens.",
+    "platform": "Plataforma",
+    "tracks": "Trilhas",
+    "resources": "Recursos",
+    "stats": "Estatísticas",
+    "sandbox": "Sandbox",
+    "account": "Conta",
+    "login": "Entrar",
+    "gamification": "Gamificação",
+    "company": "Empresa",
+    "brand": "DesarrolloWeb-pdl",
+    "rights": "Todos os direitos reservados."
+  },
   "resources": {
     "title": "Recursos de estudo",
     "subtitle": "Material gratuito para aprender e praticar programação."
