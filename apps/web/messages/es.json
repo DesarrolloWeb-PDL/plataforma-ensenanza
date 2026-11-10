@@ -51,16 +51,6 @@
     "notFound": "Lección no encontrada"
   },
   "footer": {
-    "about": "Plataforma de programación para chicos y jóvenes.",
-    "platform": "Plataforma",
-    "tracks": "Tracks",
-    "resources": "Recursos",
-    "stats": "Estadísticas",
-    "sandbox": "Sandbox",
-    "account": "Cuenta",
-    "login": "Entrar",
-    "gamification": "Gamificación",
-    "company": "Empresa",
     "brand": "DesarrolloWeb-pdl",
     "rights": "Todos los derechos reservados."
   },

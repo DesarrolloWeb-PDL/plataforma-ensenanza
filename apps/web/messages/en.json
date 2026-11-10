@@ -51,16 +51,6 @@
     "notFound": "Lesson not found"
   },
   "footer": {
-    "about": "Programming platform for kids and teens.",
-    "platform": "Platform",
-    "tracks": "Tracks",
-    "resources": "Resources",
-    "stats": "Stats",
-    "sandbox": "Sandbox",
-    "account": "Account",
-    "login": "Sign in",
-    "gamification": "Gamification",
-    "company": "Company",
     "brand": "DesarrolloWeb-pdl",
     "rights": "All rights reserved."
   },

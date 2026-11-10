@@ -25,64 +25,16 @@ function PdlLogo({ size = 20 }: { size?: number }) {
 export default function AppFooter() {
   const t = useTranslations("footer");
 
-  const columns = [
-    {
-      title: t("platform"),
-      links: [
-        { href: "/tracks", label: t("tracks") },
-        { href: "/resources", label: t("resources") },
-        { href: "/stats", label: t("stats") },
-        { href: "/sandbox", label: t("sandbox") },
-      ],
-    },
-    {
-      title: t("account"),
-      links: [
-        { href: "/auth", label: t("login") },
-        { href: "/gamification", label: t("gamification") },
-      ],
-    },
-  ];
-
   return (
     <footer className="brutal-footer">
-      <div className="footer-grid">
-        <div className="footer-col">
-          <div className="footer-brand-title">
-            <span className="brutal-squares">
-              <span style={{ background: "var(--brutal-yellow)" }} />
-              <span style={{ background: "var(--brutal-pink)" }} />
-              <span style={{ background: "var(--brutal-cyan)" }} />
-              <span style={{ background: "var(--brutal-green)" }} />
-            </span>
-            <span>DesarrolloWeb Academy</span>
-          </div>
-          <p className="footer-about">{t("about")}</p>
-        </div>
-
-        {columns.map((col) => (
-          <div className="footer-col" key={col.title}>
-            <h4 className="footer-subtitle">{col.title}</h4>
-            <ul className="footer-links">
-              {col.links.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-
-        <div className="footer-col">
-          <h4 className="footer-subtitle">{t("company")}</h4>
-          <ul className="footer-links">
-            <li>
-              <a href={COMPANY_URL} target="_blank" rel="noopener noreferrer">
-                {t("brand")}
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div className="footer-brand-title">
+        <span className="brutal-squares">
+          <span style={{ background: "var(--brutal-yellow)" }} />
+          <span style={{ background: "var(--brutal-pink)" }} />
+          <span style={{ background: "var(--brutal-cyan)" }} />
+          <span style={{ background: "var(--brutal-green)" }} />
+        </span>
+        <span>DesarrolloWeb Academy</span>
       </div>
 
       <div className="footer-bottom">
