@@ -76,6 +76,8 @@
 .btnSecondary:hover { transform: translate(4px, 4px); box-shadow: 2px 2px 0 #000; }
 
 .heroImageWrap {
+  position: relative;
+  z-index: 1;
   margin: 2.5rem auto 0;
   max-width: 900px;
   border: var(--brutal-border);
