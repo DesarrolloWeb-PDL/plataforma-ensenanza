@@ -454,7 +454,13 @@ img {
   transition: transform 0.1s ease;
 }
 .footer-brand a:hover {
+  color: var(--brutal-orange);
   transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+.footer-brand a:active {
+  color: var(--brutal-orange);
+  transform: translate(4px, 4px);
   box-shadow: 0 0 0 #000;
 }
 
