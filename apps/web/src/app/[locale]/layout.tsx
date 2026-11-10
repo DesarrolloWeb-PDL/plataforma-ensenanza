@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import "../globals.css";
 
 import HeaderNav from "@/components/HeaderNav";
+import FooterEmblem from "@/components/FooterEmblem";
 import PostHogProvider from "@/components/PostHogProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
@@ -48,7 +49,7 @@ export default async function LocaleLayout({
             </header>
             <div className="brutal-main">{children}</div>
             <footer className="brutal-footer">
-              © {new Date().getFullYear()} Plataforma de Enseñanza — DesarrolloWeb-PDL
+              <FooterEmblem />
             </footer>
           </NextIntlClientProvider>
         </PostHogProvider>
