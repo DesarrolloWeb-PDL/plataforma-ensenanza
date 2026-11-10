@@ -258,3 +258,40 @@
   border-top: var(--brutal-border);
   background: var(--brutal-cyan);
 }
+
+/* ---------- Responsive landing ---------- */
+@media (max-width: 720px) {
+  .hero {
+    padding: 2.5rem 1rem 2rem;
+  }
+  .heroTitle {
+    font-size: clamp(2rem, 9vw, 3.2rem);
+    text-shadow: 4px 4px 0 var(--brutal-pink);
+    overflow-wrap: anywhere;
+  }
+  .heroSubtitle {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    margin-bottom: 1.5rem;
+  }
+  .sectionTitle,
+  .finalCtaTitle {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    overflow-wrap: anywhere;
+  }
+  .trackTitle {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    overflow-wrap: anywhere;
+  }
+  .section {
+    padding: 2.5rem 1rem;
+  }
+  .finalCta {
+    padding: 2.5rem 1rem;
+  }
+  .btnPrimary,
+  .btnSecondary,
+  .trackLink {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
