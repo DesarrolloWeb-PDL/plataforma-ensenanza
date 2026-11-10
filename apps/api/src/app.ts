@@ -29,6 +29,8 @@ export async function buildApp(inputEnv?: Env): Promise<{ app: FastifyInstance; 
 
   await app.register(cors, {
     origin: env.CORS_ORIGIN.split(",").map((origin) => origin.trim()).filter(Boolean),
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   });
 
   const db = env.DATABASE_URL ? createDb(env.DATABASE_URL) : undefined;
