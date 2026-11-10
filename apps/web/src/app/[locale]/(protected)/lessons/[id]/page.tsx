@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import LessonSandbox from "@/components/LessonSandbox";
 import MdxContent from "@/components/MdxContent";
 import ProgressButton from "@/components/ProgressButton";
+import Quiz from "@/components/Quiz";
 import { loadContent } from "@/lib/content";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
@@ -38,6 +39,8 @@ export default async function LessonPage({ params }: { params: { id: string; loc
   const { frontmatter, content } = loadContent(lesson.mdxRef);
 
   const isBlocks = lesson.trackId.includes("bloques") || lesson.mdxRef.includes("bloques");
+  const isQuiz = lesson.mdxRef.includes("lesson-3");
+  const quizId = lesson.mdxRef.includes("bloques") ? "bloques" : "html5";
 
   return (
     <main>
@@ -45,6 +48,8 @@ export default async function LessonPage({ params }: { params: { id: string; loc
       {frontmatter.description ? <p>{frontmatter.description}</p> : null}
       <ProgressButton kind="lesson" id={lesson.id} />
       <MdxContent source={content} />
+
+      {isQuiz ? <Quiz quizId={quizId} /> : null}
 
       {isBlocks ? (
         <section style={{ marginTop: "2rem" }}>
