@@ -60,7 +60,7 @@ export default async function LessonPage({ params }: { params: { id: string; loc
               src="/blockly-sandbox.html"
               title="Sandbox de bloques"
               width="100%"
-              height="480"
+              height={760}
               style={{ border: 0, display: "block" }}
             />
           </div>
